@@ -55,6 +55,7 @@ if __name__ == "__main__":
     # os.system("cls")
     print("Hola Mundo")
     print(numero_aleatorio(11, 20)) # argumentos
+    print(etapa_ternario(95))
     print(". . . Hecho")
     
         
