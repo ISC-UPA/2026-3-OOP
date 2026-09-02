@@ -29,11 +29,34 @@ def etapa_ifelse(edad):
         etapa = 4
    return etapa    
 
+def etapa_switch(edad):
+    match edad:
+        case edad if edad <= 30:
+            return 1
+        case edad if edad <= 60:
+            return 2
+        case edad if edad <= 90:
+            return 3
+        case _:
+            return 4
+
+def etapa_ternario(edad):
+    etapa = 1 if edad <=30 else 2 if edad <= 60 else 3 if edad <= 90 else 4
+    etapa = (
+          1 if edad <= 30 else
+          2 if edad <= 60 else
+          3 if edad <= 90 else
+          4
+      )
+    return etapa    
+
+
 if __name__ == "__main__":
     os.system("cls")
     print("Hola Bienvenidos")
     print(numero_aleatorio(11, 20))
     print(etapa_if(35))
     print(etapa_ifelse(40))
+    print("etapa_switch" , (95))
     print(". . .Hecho")
     
