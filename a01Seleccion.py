@@ -16,13 +16,24 @@ def etapa_if(edad):
     if (edad >=91):
         etapa = 4
     return etapa
-           
 
+def etapa_ifelse(edad):
+   etapa=0
+   if (edad <=30):
+        etapa = 1
+   elif (edad <=60):
+        etapa =2
+   elif (edad <=90):
+        etapa = 3
+   else :
+        etapa = 4
+   return etapa    
 
 if __name__ == "__main__":
     os.system("cls")
     print("Hola Bienvenidos")
     print(numero_aleatorio(11, 20))
     print(etapa_if(35))
+    print(etapa_ifelse(40))
     print(". . .Hecho")
     
