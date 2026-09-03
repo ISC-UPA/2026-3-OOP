@@ -2,6 +2,8 @@ import os
 import random
 
 def numero_aleatorio(min, max=100):
+    if (min > max):
+        raise ValueError("El valor mínimo no puede ser mayor que el máximo")
     return random.randint(min, max)
 
 def etapa_if(edad):
@@ -51,10 +53,10 @@ def etapa_ternario(edad):
 
 if __name__ == "__main__":
     os.system("cls")
+    
     print("Hola Mundo")
-    c= numero_aleatorio(11,20)
+    c = numero_aleatorio(11,20)
     print(numero_aleatorio(30))
-    print(etapa_ternario(19))
    
     print(". . . Hecho")
     
