@@ -55,8 +55,9 @@ if __name__ == "__main__":
     os.system("cls")
     
     print("Hola Mundo")
-    c = numero_aleatorio(11,20)
-    print(numero_aleatorio(30))
+    c = numero_aleatorio( 1 , 20)
+    print("Aleatorio:", numero_aleatorio(30))
+    print("Etapa: ",    etapa_ternario(95))
    
     print(". . . Hecho")
     
