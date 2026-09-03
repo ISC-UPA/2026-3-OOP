@@ -58,6 +58,7 @@ if __name__ == "__main__":
     c = numero_aleatorio( 1 , 20)
     print("Aleatorio:", numero_aleatorio(30))
     print("Etapa: ",    etapa_ternario(95))
+    
    
     print(". . . Hecho")
     
