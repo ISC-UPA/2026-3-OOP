@@ -60,16 +60,8 @@ if __name__ == "__main__":
     print("Aleatorio:", numero_aleatorio(30))
     print("Etapa: ",    etapa_ternario(95))
     '''
+
     
-    etapaD = {1: "Primera Edad", 2: "Segunda Edad", 3: "Tercera Edad", 4: "Horas Extras"}
-    edad = 95
-    etapaN = etapa_ternario(edad)
-    descripcion = etapaD[etapaN]
-    print(descripcion)
-   
-    mes = ["", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
-    n = 3
-    print("Mes:", mes[n])
-    
-   
+
     print(". . . Hecho")
+    
