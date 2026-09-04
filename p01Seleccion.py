@@ -53,9 +53,18 @@ def etapa_ternario(edad):
 
 if __name__ == "__main__":
     os.system("cls")
+    
+    '''
     print("Hola Mundo")
     c = numero_aleatorio( 1 , 20)
     print("Aleatorio:", numero_aleatorio(30))
     print("Etapa: ",    etapa_ternario(95))
+    '''
+    
+    etapaD = {1: "Primera Edad", 2: "Segunda Edad", 3: "Tercera Edad", 4: "Horas Extras"}
+    edad = 25
+    etapaN = etapa_ternario(edad)
+    descripcion = etapaD[etapaN]
+    print(descripcion)
    
     print(". . . Hecho")
