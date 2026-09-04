@@ -62,9 +62,14 @@ if __name__ == "__main__":
     '''
     
     etapaD = {1: "Primera Edad", 2: "Segunda Edad", 3: "Tercera Edad", 4: "Horas Extras"}
-    edad = 25
+    edad = 95
     etapaN = etapa_ternario(edad)
     descripcion = etapaD[etapaN]
     print(descripcion)
+   
+    mes = ["", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+    n = 3
+    print("Mes:", mes[n])
+    
    
     print(". . . Hecho")
