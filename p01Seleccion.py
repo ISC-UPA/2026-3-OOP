@@ -54,10 +54,13 @@ def etapa_ternario(edad):
 if __name__ == "__main__":
     os.system("cls")
     etapaD ={1:"Primera Edad", 2:"Segunda Edad", 3:"Tercera Edad", 4:"Horas Extras"}
-    etapaL=["Primera Edad", "Segunda Edad", "Tercera Edad", "Horas Extras"]
-    etapaN = etapa_if(95)
-    Descripcion = etapaD[etapaN]
-    print(Descripcion)
+    etapaL=["", "Primera Edad", "Segunda Edad", "Tercera Edad", "Horas Extras"]
+    mes = ["","ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
+    etapaN = etapa_if(20)
+    DescripcionD = etapaD[etapaN]
+    DescripcionL = etapaL[etapaN]
+    print(DescripcionL)
+    print(mes[3])
     
     
     
