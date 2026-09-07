@@ -70,12 +70,9 @@ if __name__ == "__main__":
     print("Con Lista:       ", etapaL[etapaN])
     print("Con Diccionario: ", etapaD[etapaN])
 
-    
     mes = ["", "ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
     n = 10
     print("Mes:", mes[n])
-
-
 
     print(". . . Hecho")
     
