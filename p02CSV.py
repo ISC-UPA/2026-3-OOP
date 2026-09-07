@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
-import csv 
+import csv
+import sys 
 import pandas as pd
 from datetime import date
 
@@ -21,4 +22,8 @@ print(db_file)
 df = pd.read_csv(db_file, encoding="latin-1")
 print(df)
 gobernadoras = df[df["Sexo"] == False]
+
+print(os.getcwd())  # ruta donde esta el proyecto
+print(sys.path)
+
 
