@@ -6,7 +6,10 @@ import pandas as pd
 from datetime import date
 
 os.system('cls' if os.name == 'nt' else 'clear')
+print("Hola Mundo")
 
+
+'''
 # Leer ubicacion del archivo CSV usando Path   # Recomendado
 # Path(p).resolve() --> Ruta absoluta y el archivo
 # Path(p).parent()  --> Carpeta padre
@@ -25,5 +28,6 @@ gobernadoras = df[df["Sexo"] == False]
 
 print(os.getcwd())  # ruta donde esta el proyecto
 print(sys.path)
+'''
 
 
