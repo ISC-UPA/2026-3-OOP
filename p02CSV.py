@@ -15,9 +15,14 @@ print("\n",sys.path, "\n")  # lista de rutas donde busca modulos y paquetes
 # os.getcwd())      --> Ruta absoluta incluyendo el proyecto
 # Path(p).resolve() --> Ruta absoluta incluyendo el archivo.py
 # Path(p).parent()  --> Subete a la Carpeta padre
-db_file = Path(__file__).resolve().parent /  "Estados.csv"  # / cancatena
-print(db_file)
+#db_file = Path(__file__).resolve().parent /  "Estados.csv"  # / cancatena
+#print(db_file)
+#-->
+db_file = Path(__file__).resolve().parent  # / cancatena
+print("-->", db_file)
 
+# <--
+'''
 # Leer ubicacion del archivo CSV usando os.path  # Clasico o antiguo
 #base_dir = os.path.dirname(os.path.dirname(__file__))  # sube un nivel de donde esta este archivo
 #db_file = os.path.join(base_dir, "2026-3-OOP", "Estados.csv")
@@ -64,4 +69,5 @@ print(ruta_absoluta)
 print(ruta_proyecto)
 print(ruta_relativa)
 
+'''
 

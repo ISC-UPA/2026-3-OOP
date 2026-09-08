@@ -1,12 +1,15 @@
+# Hola Cuates
+
+
 import os
 import sys
 from pathlib import Path
 
 print(os.system('cls'))
 print("\n",sys.path, "\n")  # lista de rutas donde busca modulos y paquetes
-print(os.getcwd())
-db_file = Path(__file__).resolve().parent
-print(db_file)
+print("1-->", os.getcwd())
+db_file = Path(__file__).resolve().parent.parent / ""
+print("2-->", db_file)
 
 
 ruta_absoluta = db_file
