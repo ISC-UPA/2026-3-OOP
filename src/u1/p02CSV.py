@@ -14,7 +14,7 @@ def rutaRelativa(ruta_absoluta):
 
 
 def consultarPandas(db_file):
-    df = pd.read_csv(db_file, encoding="latin-1")
+    df = pd.read_csv(db_file, encoding="latin-1")  # utf-8
     gobernadoras = df[df["Sexo"] == False]
     print(gobernadoras)
 
