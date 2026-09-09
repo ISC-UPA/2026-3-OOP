@@ -58,7 +58,7 @@ def main():
     #db_file = os.getcwd() + "\\data\\Estados.csv"   # ruta absoluta
     print("Ruta:", db_file)
     
-    #consultarPandas(db_file)
+    consultarPandas(db_file)
     #consultarCSV(db_file)
 
 if __name__ == "__main__":
