@@ -2,11 +2,9 @@ import csv
 import os
 from datetime import date
 from pathlib import Path
-
 import pandas as pd
 
 from src.tools.fn import numero_aleatorio
-
 
 def rutaRelativa(ruta_absoluta):
     ruta_proyecto = os.getcwd()
@@ -15,6 +13,7 @@ def rutaRelativa(ruta_absoluta):
 
 def consultarPandas(db_file):
     df = pd.read_csv(db_file, encoding="latin-1")  # utf-8
+    print(df)
     gobernadoras = df[df["Sexo"] == False]
     print(gobernadoras)
 
@@ -30,6 +29,9 @@ def consultarCSV(db_file):
 
         with open(db_file, "r", encoding="latin-1", newline="") as lectura:
             lector_csv = csv.DictReader(lectura)
+            cabeceras = lector_csv.fieldnames
+            print("Cabeceras:", cabeceras)
+
             for fila in lector_csv:
                 idCiudad = int(fila["IdEstado"])
                 abr = fila["Abr"]
@@ -50,7 +52,7 @@ def main():
     print("db_file:", db_file)
 
     consultarPandas(db_file)
-    # consultarCSV(db_file)
+    consultarCSV(db_file)
 
 
 if __name__ == "__main__":
