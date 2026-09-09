@@ -4,7 +4,12 @@ from datetime import date
 from pathlib import Path
 import pandas as pd
 
-# from src.tools.fn import numero_aleatorio
+import sys
+sys.path.append(os.getcwd() + "/src")
+
+import src.tools.fn as fn
+#from src.tools import fn
+#from src.tools.fn import numero_aleatorio
 
 def rutaRelativa(ruta_absoluta):
     ruta_proyecto = os.getcwd()
@@ -12,10 +17,10 @@ def rutaRelativa(ruta_absoluta):
 
 
 def consultarPandas(db_file):
-    df = pd.read_csv(db_file, encoding="latin-1")  # utf-8
-    print(df)
-    gobernadoras = df[df["Sexo"] == False]
-    print(gobernadoras)
+    df = pd.read_csv(db_file, encoding="latin-1")  # utf-8  latin-1 ascii
+    print("1--->",df)
+    #gobernadoras = df[df["Sexo"] == False]
+    #print(gobernadoras)
 
 
 def consultarCSV(db_file):
@@ -49,16 +54,17 @@ def consultarCSV(db_file):
 
 def main():
     db_file = Path(__file__).resolve().parent.parent.parent / "data" / "Estados.csv"
-    db_file = os.getcwd() + "/data/Estados.csv"   # ruta absoluta
-    print("db_file:", db_file)
-    print("")
-    consultarPandas(db_file)
-    consultarCSV(db_file)
-
+    #db_file = os.getcwd() + "/data/Estados.csv"     # ruta absoluta
+    #db_file = os.getcwd() + "\\data\\Estados.csv"   # ruta absoluta
+    print("Ruta:", db_file)
+    
+    #consultarPandas(db_file)
+    #consultarCSV(db_file)
 
 if __name__ == "__main__":
     os.system("cls")
     main()
-    # print("Número aleatorio:", numero_aleatorio(11, 20))
+    #print("Número aleatorio:", numero_aleatorio(11, 20))
+    print("Número aleatorio:", fn.numero_aleatorio(11, 20))
     print(". . . Hecho")
 
