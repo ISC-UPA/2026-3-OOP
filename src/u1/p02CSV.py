@@ -53,9 +53,9 @@ def consultarCSV(db_file):
 
 
 def main():
-    db_file = Path(__file__).resolve().parent.parent.parent / "data" / "Estados.csv"
-    #db_file = os.getcwd() + "/data/Estados.csv"     # ruta absoluta
-    #db_file = os.getcwd() + "\\data\\Estados.csv"   # ruta absoluta
+    #db_file = Path(__file__).resolve().parent.parent.parent / "data" / "Estados.csv"
+    #db_file = os.getcwd() + "/data/Estados.csv"      # ruta absoluta
+    db_file = os.getcwd() + "\\data\\Estados.csv"   # ruta absoluta
     print("Ruta:", db_file)
     
     consultarPandas(db_file)
