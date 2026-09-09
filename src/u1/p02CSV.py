@@ -4,7 +4,7 @@ from datetime import date
 from pathlib import Path
 import pandas as pd
 
-from src.tools.fn import numero_aleatorio
+# from src.tools.fn import numero_aleatorio
 
 def rutaRelativa(ruta_absoluta):
     ruta_proyecto = os.getcwd()
@@ -49,14 +49,16 @@ def consultarCSV(db_file):
 
 def main():
     db_file = Path(__file__).resolve().parent.parent.parent / "data" / "Estados.csv"
+    db_file = os.getcwd() + "/data/Estados.csv"   # ruta absoluta
     print("db_file:", db_file)
-
+    print("")
     consultarPandas(db_file)
     consultarCSV(db_file)
 
 
 if __name__ == "__main__":
+    os.system("cls")
     main()
-    print("Número aleatorio:", numero_aleatorio(11, 20))
+    # print("Número aleatorio:", numero_aleatorio(11, 20))
     print(". . . Hecho")
 
