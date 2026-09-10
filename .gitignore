@@ -221,5 +221,6 @@ __marimo__/
 personal/
 *.docx
 *.txt
-_*.*
+-*.*
+
 
