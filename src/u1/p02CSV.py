@@ -1,26 +1,26 @@
 import csv
-import os
+import os, sys
 from datetime import date
 from pathlib import Path
 import pandas as pd
 
-import sys
-sys.path.append(os.getcwd() + "/src")
+sys.path.append(os.getcwd())  # No borrar  
 
 import src.tools.fn as fn
 #from src.tools import fn
 #from src.tools.fn import numero_aleatorio
 
 def rutaRelativa(ruta_absoluta):
+    print("\n",sys.path, "\n")
     ruta_proyecto = os.getcwd()
     return os.path.relpath(ruta_absoluta, ruta_proyecto)
 
 
 def consultarPandas(db_file):
     df = pd.read_csv(db_file, encoding="latin-1")  # utf-8  latin-1 ascii
-    print("1--->",df)
-    #gobernadoras = df[df["Sexo"] == False]
-    #print(gobernadoras)
+    #print(df)
+    gobernadoras = df[df["Sexo"] == False]
+    print(gobernadoras)
 
 
 def consultarCSV(db_file):
@@ -60,6 +60,7 @@ def main():
     
     consultarPandas(db_file)
     #consultarCSV(db_file)
+    print("Número aleatorio:", fn.numero_aleatorio(11, 20))
 
 if __name__ == "__main__":
     os.system("cls")
