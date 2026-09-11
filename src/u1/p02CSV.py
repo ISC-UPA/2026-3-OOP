@@ -58,14 +58,13 @@ def main():
     #db_file = Path(__file__).resolve().parent.parent.parent / "data" / "Estados.csv"
     #db_file = os.getcwd() + "/data/Estados.csv"      # ruta absoluta
     db_file = os.getcwd() + "\\data\\Estados.csv"   # ruta absoluta
-    print("Ruta:", db_file)
     
     #consultarPandas(db_file)
     consultarCSV(db_file)
     print("Número aleatorio:", fn.numero_aleatorio(11, 20))
 
 if __name__ == "__main__":
-    #os.system("cls")
+    os.system("cls")
     main()
     #print("Número aleatorio:", numero_aleatorio(11, 20))
     print("Número aleatorio:", fn.numero_aleatorio(11, 20))
