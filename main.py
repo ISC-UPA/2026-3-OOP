@@ -14,7 +14,7 @@ def main():
     print(f"Bienvenido al curso de {MATERIA} en la carrera de {carrera}")  # POO
    
     #prg.main()
-    #runpy.run_module(prg.__name__, run_name="__main__")
+    runpy.run_module(prg.__name__, run_name="__main__")
     #runpy.run_path(prg.__file__)
 
 if __name__ == "__main__":
