@@ -17,12 +17,20 @@ def main():
         r"Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
         fr"DBQ={db_file};"
     )
+    # Conexión
+    conn = pyodbc.connect(conn_str)
+    cursor = conn.cursor() 
+    
+    sql = "SELECT * FROM Estados where Partido = 'PAN'"
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+    cursor.close()
+      
     
 
-# Conexión
-conn = pyodbc.connect(conn_str)
-cursor = conn.cursor()     
-    
+
     
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
