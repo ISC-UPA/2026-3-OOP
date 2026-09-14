@@ -7,7 +7,7 @@ from pathlib import Path
 from src.u1 import p02CSV as prg
 
 def main():
-    global MATERIA
+    # global MATERIA
     MATERIA ="POO"
     print(f"Bienvenido al curso de {MATERIA}")  # POO
    
