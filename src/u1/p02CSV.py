@@ -1,6 +1,6 @@
 import csv
 import os, sys
-from datetime import date
+from datetime import datetime
 from pathlib import Path
 import pandas as pd
 
@@ -38,21 +38,26 @@ def consultarCSV(db_file):
         
         cabeceras = lector_csv.fieldnames
         print("Cabeceras:", cabeceras)
-
+        habitantes = 0
         for fila in lector_csv:
             idCiudad = int(fila["IdEstado"])
             abr = fila["Abr"]
-            fecha = date.strptime(fila["Inicio"], "%d/%m/%Y")  
+            fecha = datetime.strptime(fila["Inicio"], "%d/%m/%Y")  
 
             if fila["Partido"] == "PAN":
+                habitantes += int(fila["Hombres"]) +  int(fila["Mujeres"])
                 ciudades.append((idCiudad, abr, fecha.year))
+                #ciudades.append(fila) 
                 escritor.writerow([idCiudad, abr, fila["Partido"], fila["Nacimiento"]])
+                #escritor.writerow(fila.values())
 
             partidos[fila["Partido"]] = partidos.get(fila["Partido"], 0) + 1
     archivo.close()
     
     print(ciudades)
     print("\nConteo de partidos:\n", partidos)
+    print("\nTotal de habitantes gobernados por el PAN:", habitantes)
+    
 
 def main():
     #db_file = Path(__file__).resolve().parent.parent.parent / "data" / "Estados.csv"

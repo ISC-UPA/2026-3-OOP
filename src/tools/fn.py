@@ -5,4 +5,9 @@ def numero_aleatorio(min, max=100):
         raise ValueError("El valor mínimo no puede ser mayor que el máximo")
     return random.randint(min, max)
 
+def sumar(a, b):
+    return a + b
+
+
+
 
