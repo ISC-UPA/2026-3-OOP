@@ -12,7 +12,7 @@ def main():
     #numero =fn.numero_aleatorio(90)
     #print(f"El número aleatorio es: {numero}")
     
-    db_file = os.getcwd()+ "/data/Estados.accdb"
+    db_file = os.getcwd()+ "/src/data/Estados.accdb"
     conn_str = (
         r"Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
         fr"DBQ={db_file};"
