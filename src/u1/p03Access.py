@@ -9,8 +9,20 @@ from src.tools import fn
 #from src.tools.fn import numero_aleatorio, sumar
 
 def main():
-    numero =fn.numero_aleatorio(90)
-    print(f"El número aleatorio es: {numero}")
+    #numero =fn.numero_aleatorio(90)
+    #print(f"El número aleatorio es: {numero}")
+    
+    db_file = os.getcwd()+ "/src/data/Estados.accdb"
+    conn_str = (
+        r"Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
+        fr"DBQ={db_file};"
+    )
+    
+
+# Conexión
+conn = pyodbc.connect(conn_str)
+cursor = conn.cursor()     
+    
     
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
