@@ -22,6 +22,6 @@ if __name__ == "__main__":
       os.system("cls" if os.name == 'nt' else 'clear')  # Limpiar pantalla
       main()
       print(f"Nos vemos mañana  en {MATERIA}") # OOP
-      print(". . . Hecho")
+      print(". . . Hecho Amigos")
       
   
