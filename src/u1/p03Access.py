@@ -1,13 +1,15 @@
 import os, sys
 from pathlib import Path
-import datetime
+from datetime import date
 import pandas as pd
 import pyodbc
 
-sys.path.append(os.getcwd())
+sys.path.append("src")
+#sys.path.append(os.getcwd())
 
-from src.tools import fn                             # general
-#from src.tools.fn import numero_aleatorio, sumar     # especifica
+from tools import fn                                 # general
+# from src.tools import fn                             # general
+# from src.tools.fn import numero_aleatorio, sumar     # especifica
 
 def main():
     numero = fn.numero_aleatorio(90)
@@ -42,10 +44,16 @@ def main():
     
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
-    fecha = datetime.datetime.now()
-    nacimiento = datetime.datetime(2000, 9, 15)
+    fecha = date.today()
+    dia_semana = fecha.weekday()  # 0=lun, 6=dom
+    print(f"día de la semana: {dia_semana}")
+    nacimiento = date(2000, 9, 15)
+    nacimiento = date.fromisoformat("2000-09-15")
+    nacimiento = date.strptime("15/09/2000", "%d/%m/%Y")
     edad = fecha.year - nacimiento.year
+    sueldo= 1234.567
     print(edad)
-    main()
+    print(f"El sueldo es: {sueldo:>15,.2f}")
+    # main()
     print(". . . H e c h o")
     
