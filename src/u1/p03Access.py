@@ -28,9 +28,10 @@ def main():
     sql2 = "select IdEstado, abr, gobernador, nacimiento, \n" + \
            "       YEAR(NOW()) - YEAR(nacimiento) as Edad \n" + \
            "FROM Estados where Partido = ?"
+    partido = "PAN"       
     print(sql2)
     cursor.execute(sql1)
-    cursor.execute(sql2, ("PAN",))
+    cursor.execute(sql2, (partido,))
     rows = cursor.fetchall()
     for row in rows:
         print(row)
@@ -53,7 +54,7 @@ if __name__ == "__main__":
     edad = fecha.year - nacimiento.year
     sueldo= 1234.567
     print(edad)
-    print(f"El sueldo es: {sueldo:>15,.2f}")
-    # main()
+    print(f"El sueldo es: {sueldo:^15,.2f}")
+    main()
     print(". . . H e c h o")
     
