@@ -11,6 +11,21 @@ from tools import fn                                 # general
 # from src.tools import fn                             # general
 # from src.tools.fn import numero_aleatorio, sumar     # especifica
 
+def insertar_estados(IdEstado, abr, Partido, gobernador, nacimiento):
+    db_file = os.getcwd()+ "/data/Estados.accdb"
+    conn_str = (
+        r"Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
+        fr"DBQ={db_file};"
+    )
+    # Conexión
+    conn = pyodbc.connect(conn_str)
+    cursor = conn.cursor() 
+    sql = "INSERT INTO Estados (IdEstado, abr, Partido, gobernador, nacimiento) VALUES (?, ?, ?, ?, ?)"
+    cursor.execute(sql, (IdEstado, abr, Partido, gobernador, nacimiento))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
 def main():
     numero = fn.numero_aleatorio(90)
     print(f"El número aleatorio es: {numero}")
@@ -42,6 +57,9 @@ def main():
     df = pd.read_sql_query(sql2, conn, params=("PAN"))    
     conn.close()
     print(df)
+    
+    insertar_estados(33, "For", "Foraneos", "Pepito", date.date(2000, 9, 15)) # Se queman los folios
+
     
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
