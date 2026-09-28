@@ -12,54 +12,50 @@ from tools import fn                                 # general
 # from src.tools.fn import numero_aleatorio, sumar     # especifica
 
 def insertar_estados(IdEstado, abr, Nombre, gobernador, nacimiento):
-    db_file = os.getcwd()+ "/data/Estados.accdb"
-    conn_str = (
-        r"Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
-        fr"DBQ={db_file};"
-    )
-    # Conexión
-    conn = pyodbc.connect(conn_str)
-    cursor = conn.cursor() 
     sql = "INSERT INTO Estados (IdEstado, abr, nombre, gobernador, nacimiento) VALUES (?, ?, ?, ?, ?)"
     cursor.execute(sql, (IdEstado, abr, Nombre, gobernador, nacimiento))
     conn.commit()
-    cursor.close()
-    conn.close()
+    print(f"Estado '{IdEstado}' insertado correctamente.")
+
+def actualizar_estado(IdEstado, Nombre, nacimiento):
+    sql = "UPDATE Estados SET nombre = ?, nacimiento = ? WHERE IdEstado = ?"
+    cursor.execute(sql, (Nombre, nacimiento, IdEstado))
+    conn.commit()
+    print(f"Estado '{IdEstado}' actualizado correctamente.")
+
+def eliminar_estado(IdEstado):
+    sql = "DELETE FROM Estados WHERE IdEstado = ?"
+    cursor.execute(sql, (IdEstado,))
+    conn.commit()
+    print(f"Estado '{IdEstado}' eliminado correctamente.")
+
 
 def main():
     numero = fn.numero_aleatorio(90)
     print(f"El número aleatorio es: {numero}")
     
-    db_file = os.getcwd()+ "/data/Estados.accdb"
-    conn_str = (
-        r"Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
-        fr"DBQ={db_file};"
-    )
-    # Conexión
-    conn = pyodbc.connect(conn_str)
-    cursor = conn.cursor() 
-    
+    partido = "PAN"       
     sql1 = "SELECT * FROM Estados where Partido = 'PAN'"
-    sql2 = "select IdEstado, abr, gobernador, nacimiento, \n" + \
+    sql2 = f"SELECT * FROM Estados where Partido = '{partido}'"
+    sql3 = "select IdEstado, abr, gobernador, nacimiento, \n" + \
            "       YEAR(NOW()) - YEAR(nacimiento) as Edad \n" + \
            "FROM Estados where Partido = ?"
-    partido = "PAN"       
+  
     print(sql2)
     cursor.execute(sql1)
-    cursor.execute(sql2, (partido,))
-    rows = cursor.fetchall()
-    for row in rows:
+    cursor.execute(sql3, (partido))
+    for row in cursor.fetchall():
         print(row)
-    cursor.close()
     
     # Con pandas 
-    #df = pd.read_sql_query(sql1, conn)
-    df = pd.read_sql_query(sql2, conn, params=("PAN"))    
-    conn.close()
+    # df = pd.read_sql_query(sql1, conn)
+    df = pd.read_sql_query(sql3, conn, params=(partido))    
     print(df)
     
     insertar_estados(33, "For", "Foraneos", "Pepito", date(2000, 9, 15)) # Se queman los folios
-
+    actualizar_estado(33, "Foragiditos", date(2020, 9, 15))
+    eliminar_estado(33)
+    # cursor.close()
     
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -73,8 +69,17 @@ if __name__ == "__main__":
     edad = fecha.year - nacimiento.year
     sueldo= 1234.567
     print(edad)
-    print(f"El sueldo es: {sueldo:>15,.2f}")
+    print(f"El sueldo es: {sueldo:^15,.2f}")
     '''
+    
+    db_file = os.getcwd()+ "/data/Estados.accdb"
+    conn_str = (
+        r"Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
+        fr"DBQ={db_file};"
+    )
+    # Conexión
+    conn = pyodbc.connect(conn_str)
+    cursor = conn.cursor() 
     main()
     print(". . . H e c h o")
     
