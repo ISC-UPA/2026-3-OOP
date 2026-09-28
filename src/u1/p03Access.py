@@ -63,6 +63,7 @@ def main():
     
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
+    '''
     fecha = date.today()
     dia_semana = fecha.weekday()  # 0=lun, 6=dom
     print(f"día de la semana: {dia_semana}")
@@ -72,7 +73,8 @@ if __name__ == "__main__":
     edad = fecha.year - nacimiento.year
     sueldo= 1234.567
     print(edad)
-    print(f"El sueldo es: {sueldo:^15,.2f}")
+    print(f"El sueldo es: {sueldo:>15,.2f}")
+    '''
     main()
     print(". . . H e c h o")
     
