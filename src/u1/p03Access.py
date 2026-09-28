@@ -11,7 +11,7 @@ from tools import fn                                 # general
 # from src.tools import fn                             # general
 # from src.tools.fn import numero_aleatorio, sumar     # especifica
 
-def insertar_estados(IdEstado, abr, Partido, gobernador, nacimiento):
+def insertar_estados(IdEstado, abr, Nombre, gobernador, nacimiento):
     db_file = os.getcwd()+ "/data/Estados.accdb"
     conn_str = (
         r"Driver={Microsoft Access Driver (*.mdb, *.accdb)};"
@@ -20,8 +20,8 @@ def insertar_estados(IdEstado, abr, Partido, gobernador, nacimiento):
     # Conexión
     conn = pyodbc.connect(conn_str)
     cursor = conn.cursor() 
-    sql = "INSERT INTO Estados (IdEstado, abr, Partido, gobernador, nacimiento) VALUES (?, ?, ?, ?, ?)"
-    cursor.execute(sql, (IdEstado, abr, Partido, gobernador, nacimiento))
+    sql = "INSERT INTO Estados (IdEstado, abr, nombre, gobernador, nacimiento) VALUES (?, ?, ?, ?, ?)"
+    cursor.execute(sql, (IdEstado, abr, Nombre, gobernador, nacimiento))
     conn.commit()
     cursor.close()
     conn.close()
@@ -58,7 +58,7 @@ def main():
     conn.close()
     print(df)
     
-    insertar_estados(33, "For", "Foraneos", "Pepito", date.date(2000, 9, 15)) # Se queman los folios
+    insertar_estados(33, "For", "Foraneos", "Pepito", date(2000, 9, 15)) # Se queman los folios
 
     
 if __name__ == "__main__":
