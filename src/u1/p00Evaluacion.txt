@@ -1,0 +1,34 @@
+Evaluación de la unidad 1 (Con Revision = 9)
+ 
+Conectarse a la BD Estados y resuelva los siguientes ejercicios desde python:
+1. Mostrar la siguiente informacion de todos los gobernadores
+   IdEstado, Abr, gobernador, nacimiento,    Edad,   EtapaVida
+      33     For   Pepito      2000/05/15     26    Primera Edad
+2. Generar un CSV de los gobernadores que iniciarion la gobernatura en fin de semana
+   IdEstado, abr, gobernador, inicio,      DiaSemana
+      33     For    Pepito   2026/09/05    Sabado
+3. Cuantas gobernadoras(femeninas) hay en total (count)
+4. Cuantos municipios hay en total (sum)
+5. Cual es el mayor numero de municipios que tiene un estado (max)
+6. Mostrar el abr y el numero de habitantes de cada estado,
+   ordenados de mayor a menor por el numero de habitantes(hombres+mujeres) (order by)
+7. Obtener una lista de todos los partidos politicos que hay en los estados (distinct)
+8. Realizar una alta de un estado, con los atributos
+    idEstado, Abr, Nombre, Gobernador, Sexo, Nacimiento 
+9. Realizar una modificación de un estado, con los atributos
+    idEstado, Nombre, Nacimiento
+10. Realizar una baja de un estado, con el atributo
+    idEstado
+
+Resolver los mismas preguntas pero ahora directamente en Access. (10)
+
+( .5 )
+Un palíndromo es una palabra, frase, número o secuencia que se lee igual
+de izquierda a derecha que de derecha a izquierda, ignorando espacios, signos de puntuación y mayúsculas.
+Ejemplo: 
+3443
+oso
+reconocer
+Anita lava la tina
+Amo la pacífica paloma
+

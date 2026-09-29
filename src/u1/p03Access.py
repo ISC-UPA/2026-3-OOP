@@ -41,6 +41,12 @@ def main():
            "       YEAR(NOW()) - YEAR(nacimiento) as Edad \n" + \
            "FROM Estados where Partido = ?"
   
+    sql4 = ( 
+    "select IdEstado, abr, gobernador, nacimiento, \n" + 
+    "       YEAR(NOW()) - YEAR(nacimiento) as Edad \n" + 
+    "FROM Estados where Partido = ?"
+    ) 
+    
     print(sql2)
     cursor.execute(sql1)
     cursor.execute(sql3, (partido))

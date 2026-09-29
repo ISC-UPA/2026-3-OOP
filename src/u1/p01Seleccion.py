@@ -41,6 +41,29 @@ def etapa_switch(edad):
         case _:
             return 4
 
+def etapa_switch2(edad):
+    r = 0
+    match edad:
+        case edad if edad <= 30:
+            r = 1
+        case edad if edad <= 60:
+            r = 2
+        case edad if edad <= 90:
+            r = 3
+        case _:
+            r = 4
+    return r
+
+def etapa_ternario(edad):
+    etapa = 1 if edad <=30 else 2 if edad <= 60 else 3 if edad <= 90 else 4
+    etapa = (
+          1 if edad <= 30 else
+          2 if edad <= 60 else
+          3 if edad <= 90 else
+          4
+      )
+            return 4
+
 def etapa_ternario(edad):
     etapa = 1 if edad <=30 else 2 if edad <= 60 else 3 if edad <= 90 else 4
     etapa = (
