@@ -15,11 +15,12 @@ class Persona:
         self.edad = date.today().year - nacimiento.year
 
     def saludar(self):
-        print(f"Hola, mi nombre es {self.nombre} y tengo {self.edad} años.")
+        print(f"Hola, mi nombre es {self.nombre} y tengo {self.edad} años. El es {'Hombre' if self.sexo else 'Mujer'}")
 
 
 def main():
-    pass
+    p1 = Persona("Juan", True, 50000.0, date(1990, 5, 15))
+    p1.saludar()
 
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
