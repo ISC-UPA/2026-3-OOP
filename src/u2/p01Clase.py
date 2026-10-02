@@ -12,11 +12,21 @@ class Persona:
         self.sueldo = salario
         self.nacimiento = nacimiento
         self.edad = date.today().year - nacimiento.year
-        pass
 
+    def saludar(self):
+        texto = f'''
+        Mi nombre es {self.nombre} y tengo {self.edad} años. 
+        Mi sueldo es {self.sueldo} y nací el {self.nacimiento}. 
+        El es {'Hombre' if self.sexo else 'Mujer'}'''
+        print(texto)
 
 def main():
-    pass
+    p1 = Persona("Juan", True, 50000.0, date(1990, 5, 15))
+    p2 = Persona("María", False, 60000.0, date(1985, 8, 20))
+    p1.saludar()
+    p2.saludar()
+    
+    
 
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
