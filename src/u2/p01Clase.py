@@ -13,6 +13,11 @@ class Persona:
         self.nacimiento = nacimiento
         self.edad = date.today().year - nacimiento.year
 
+    def __str__(self):
+        return f"Persona(nombre={self.nombre}, sexo={'Hombre' if self.sexo else 'Mujer'})"
+   
+
+
     def saludar(self):
         texto = f'''
         Mi nombre es {self.nombre} y tengo {self.edad} años. 
@@ -25,6 +30,7 @@ def main():
     p2 = Persona("María", False, 60000.0, date(1985, 8, 20))
     p1.saludar()
     p2.saludar()
+    print(p1)
     
     
 
