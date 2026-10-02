@@ -43,6 +43,7 @@ def main():
     p2.saludar()
     print(p1)
     print(Persona.numero_aleatorio(1, 10))
+    print(f"El año 2020 es bisiesto: {esBisiesto(2020)}")
     
 
 if __name__ == "__main__":
