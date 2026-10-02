@@ -7,7 +7,7 @@ import pyodbc
 sys.path.append("src")
 #sys.path.append(os.getcwd())
 
-from tools import fn                                 # general
+from tools import fn                              # general
 # from src.tools import fn                             # general
 # from src.tools.fn import numero_aleatorio, sumar     # especifica
 
@@ -47,7 +47,14 @@ def main():
     "FROM Estados where Partido = ?"
     ) 
     
-    print(sql2)
+    sql5 ='''
+    select IdEstado, abr, gobernador, nacimiento,
+           YEAR(NOW()) - YEAR(nacimiento) as Edad
+    FROM Estados where Partido = ?
+    '''
+    
+    print("-->")
+    print(sql5)
     cursor.execute(sql1)
     cursor.execute(sql3, (partido))
     for row in cursor.fetchall():
@@ -58,9 +65,9 @@ def main():
     df = pd.read_sql_query(sql3, conn, params=(partido))    
     print(df)
     
-    insertar_estados(33, "For", "Foraneos", "Pepito", date(2000, 9, 15)) # Se queman los folios
-    actualizar_estado(33, "Foragiditos", date(2020, 9, 15))
-    eliminar_estado(33)
+    # insertar_estados(33, "For", "Foraneos", "Pepito", date(2000, 9, 15)) # Se queman los folios
+    # actualizar_estado(33, "Foragiditos", date(2020, 9, 15))
+    # eliminar_estado(33)
     # cursor.close()
     
 if __name__ == "__main__":

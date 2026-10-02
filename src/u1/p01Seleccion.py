@@ -62,17 +62,7 @@ def etapa_ternario(edad):
           3 if edad <= 90 else
           4
       )
-            return 4
-
-def etapa_ternario(edad):
-    etapa = 1 if edad <=30 else 2 if edad <= 60 else 3 if edad <= 90 else 4
-    etapa = (
-          1 if edad <= 30 else
-          2 if edad <= 60 else
-          3 if edad <= 90 else
-          4
-      )
-    return etapa  
+    return etapa
 
 if __name__ == "__main__":
     os.system("cls")
