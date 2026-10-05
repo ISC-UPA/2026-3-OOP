@@ -19,7 +19,7 @@ class Persona:
    
     def saludar(self):
         texto = f'''
-        Mi nombre es {self.nombre} y tengo {self.edad} años. 
+        Mi nombre es {self.nombre} y tengo {self.calcular_edad()} años. 
         Mi sueldo es {self.sueldo} y nací el {self.nacimiento}. 
         {'El es Hombre' if self.sexo else 'Ella es Mujer'}'''
         print(texto)
@@ -29,7 +29,8 @@ class Persona:
         return randint(min_val, max_val)    
 
     def calcular_edad(self) -> int: # Tarea: completar metodo para que retorne la edad
-        pass
+        edad = date.today().year - self.nacimiento.year
+        return edad
     
 def esBisiesto(year):
     if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
@@ -61,4 +62,3 @@ if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
     main()
     print("\n. . . H e c h o . . .\n")
-    
