@@ -39,7 +39,7 @@ def esBisiesto(year):
 
 def main():
     p1 = Persona("Jesus", True, 5000, date(1990, 5, 15))
-    p2 = Persona("María", False, "seis", date(1985, 8, 22)) 
+    p2 = Persona("María", False, "seis mil", date(1985, 8, 22)) 
     p1.saludar()
     p2.saludar()
     print(p1)
@@ -50,12 +50,15 @@ def main():
     personas = [
         Persona("Jesus", True, 60000, date.fromisoformat("1950-12-15")),
         Persona("Maria", False, 70000, date.strptime("2010-3-03" , "%Y-%m-%d")),
-        Persona("Jose", True, 80000,  date(1990, 2, Persona.numero_aleatorio(1, 28)))
+        Persona("Jose", True, 8000,  date(1990, 2, Persona.numero_aleatorio(1, 28)))
     ] # Tarea: Imprime la información de cada persona de manera tabular
       #        Nombre   Sexo    Sueldo  Nacimiento      Edad
       #        --------  ------  ------  --------------  ----
       #       Jesus     Hombre  60000   1950-12-15      73
       #       Maria     Mujer    7000   2010-03-03      13
+    for persona in personas:
+        print(f"{persona.nombre:<10} {'Hombre' if persona.sexo else 'Mujer':<6} {persona.sueldo:>7} {persona.nacimiento} {persona.edad}")   
+        
 
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
