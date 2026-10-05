@@ -56,10 +56,7 @@ def main():
       #        --------  ------  ------  --------------  ----
       #       Jesus     Hombre  60000   1950-12-15      73
       #       Maria     Mujer    7000   2010-03-03      13
-    for persona in personas:
-        print(f"{persona.nombre:<10} {'Hombre' if persona.sexo else 'Mujer':<6} {persona.sueldo:>7} {persona.nacimiento} {persona.edad}")   
-        
-
+    
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
     main()
