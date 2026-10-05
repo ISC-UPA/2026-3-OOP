@@ -12,7 +12,7 @@ class Persona:
         self.sexo = sexo
         self.sueldo = salario
         self.nacimiento = nacimiento
-        self.edad = date.today().year - nacimiento.year
+        # self.edad = date.today().year - nacimiento.year
 
     def __str__(self): # En vez de mostrar la dirección de memoria, muestra la información de la persona
         return f"Persona(nombre={self.nombre}, sexo={'Hombre' if self.sexo else 'Mujer'})"
