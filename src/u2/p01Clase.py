@@ -14,7 +14,7 @@ class Persona:
         self.nacimiento = nacimiento
         self.edad = date.today().year - nacimiento.year
 
-    def __str__(self):
+    def __str__(self): # En vez de mostrar la dirección de memoria, muestra la información de la persona
         return f"Persona(nombre={self.nombre}, sexo={'Hombre' if self.sexo else 'Mujer'})"
    
     def saludar(self):
@@ -28,7 +28,7 @@ class Persona:
     def numero_aleatorio(min_val, max_val=100):
         return randint(min_val, max_val)    
 
-    def calcular_edad() -> int: # Tarea: completar metodo para que retorne la edad
+    def calcular_edad(self) -> int: # Tarea: completar metodo para que retorne la edad
         pass
     
 def esBisiesto(year):
@@ -36,7 +36,6 @@ def esBisiesto(year):
         return True
     else:
         return False
-
 
 def main():
     p1 = Persona("Jesus", True, 5000, date(1990, 5, 15))
@@ -56,9 +55,7 @@ def main():
       #        Nombre   Sexo    Sueldo  Nacimiento      Edad
       #        --------  ------  ------  --------------  ----
       #       Jesus     Hombre  60000   1950-12-15      73
-      #       Maria     Mujer   70000   2010-03-03      13
-
-
+      #       Maria     Mujer    7000   2010-03-03      13
 
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
