@@ -28,17 +28,16 @@ class Persona:
     conteo = 0  # Numero de personas
  
     def __init__(self, nombre, sexo: bool, nacimiento: date): #Constructor=Inicializar propiedaes  
-        #  _sexo: Atributo protegido
-        # __sexo: Atributo privado
+        
         if not nombre.strip():
             raise ValueError("El nombre no puede estar vacío.")
         self.nombre = nombre
-        self.__sexo = sexo
+        self.__sexo = sexo    # Atributo privado
         self.nacimiento = nacimiento
         Persona.conteo += 1
     
     #def __str__(self):  # Evitar ver la direccion de memoria
-        #return f"Nombre: {self.nombre}, Sexo: {'H' if self._sexo else 'M'}"
+        #return f"Nombre: {self.nombre}, Sexo: {'H' if self.__sexo else 'M'}"
 
     def getSexo(self):
         return "Hombre" if self.__sexo else "Mujer"
@@ -57,14 +56,11 @@ class Persona:
         edad = Persona.calcularEdad(self.nacimiento)
         return f"Nombre: {self.nombre}, Sexo: {self.getSexo()}, Nacimiento: {self.nacimiento}, Edad: {edad}"
 
-    def _restarPersona(): # Metodo de clase protegido, se puede llamar desde la clase y subclases
+    def __restarPersona(): # Metodo de clase protegido, se puede llamar desde la clase y subclases
         Persona.conteo -= 1
         
-    def __subtractPersona(): # Metodo de clase privado, solo se puede llamar desde la clase
-        Persona.conteo -= 1        
-        
     def descontarPersona():
-        Persona.__subtractPersona()
+        Persona.__restarPersona()
        
 def esBisiesto(year):
     if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
@@ -76,8 +72,9 @@ def main():
     ano = 1999
     dia = 29 if esBisiesto(ano) else 28
     p1 = Persona("Juan", True, date(ano, 2, dia))
-    p1.__sexo = False  # Acceso a atributo privado, no recomendado
- 
+    p1.__sexo = False    # Se puede acceder a un atributo protegido desde fuera de la clase, pero no es recomendable
+    print(p1.info())
+    
     print(f"Conteo de personas: {Persona.conteo}")
     print(p1)
     print(p1.info())
@@ -98,9 +95,8 @@ def main():
     
     del personas[1]   
     #personas = [p for p in personas if p.nombre != "Maria"]
-    Persona._restarPersona()     
-    #Persona.__subtractPersona() # Error
-    #Persona.descontarPersona()   
+    #Persona.__restarPersona()  # Error: No se puede acceder a un método privado desde fuera de la clase
+    Persona.descontarPersona()   
     print(f"\nConteo de personas-->: {Persona.conteo}") 
     
     print(f"\n{'Nombre':<10} {'Sexo':<6} {'Nacimiento'} {'Edad':>5}")
@@ -110,7 +106,6 @@ def main():
     
     print(f"Tipo de p1: {type(p1)}")
     print(f"¿p1 es una instancia de Persona? {isinstance(p1, Persona)}")
-
 
 if __name__ == "__main__":
     os.system("cls" if os.name == "nt" else "clear")
