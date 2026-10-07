@@ -34,6 +34,11 @@ class Estudiante(Persona):
     
 
 def main():
+   # DRY (Don't Repeat Yourself)
+    print("Subclases:", Persona.__subclasses__())
+    print("Clase Padre:", Empleado.__bases__)
+    print("MRO o Method Order Resolution:", Empleado.__mro__)
+
     p1 = Empleado("Ana", False, date(1990, 5, 15), "Gerente", 50000)
     p2 = Estudiante("Luis", True, date(2000, 8, 20), "Ingeniería")
     print(f"Conteo de personas: {Persona.conteo}")
