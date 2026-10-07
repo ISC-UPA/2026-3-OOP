@@ -7,10 +7,11 @@ from abc import ABC, abstractmethod
 
 # 4 Pilares de POO
 # Herencia:       Metodos que ya existen por parte de la clase padre
-# Encapsulacion:  saldo cambia solo por depositar() y retirar()
 # Abstraccion:    Calcular_impuesto() no importa el como, sino el resultado
 # Polimorfismo:   Acelerar, funciona distinto entre una bici y un coche
-
+# Encapsulacion:  saldo cambia solo por depositar() y retirar()
+#                 Visualizacion: Public, default, Protected, Private
+#
 # Alta cohesion:     Relacion entre los elementos de un modulo
 #                    Alta: Tarea unica y bien definida
 # Bajo acoplamiento: Dependencia entre dos modulos.
@@ -46,11 +47,11 @@ class Persona:
         self._sexo = value
 
     #@staticmethod    # Metodo de Clase
-    #@abstractmethod  # Si hay un método abstracto, la clase debe ser abstracta
+    @abstractmethod  # Si hay un método abstracto, la clase debe ser abstracta
     def calcularEdad(birthdate) -> int:
         pass
-        edad = date.today().year - birthdate.year
-        return edad
+        #edad = date.today().year - birthdate.year
+        #return edad
     
     def info(self):
         edad = Persona.calcularEdad(self.nacimiento)
@@ -75,6 +76,7 @@ def main():
     ano = 1999
     dia = 29 if esBisiesto(ano) else 28
     p1 = Persona("Juan", True, date(ano, 2, dia))
+    '''  
     print(f"Conteo de personas: {Persona.conteo}")
     print(p1)
     print(p1.info())
@@ -107,6 +109,7 @@ def main():
     
     print(f"Tipo de p1: {type(p1)}")
     print(f"¿p1 es una instancia de Persona? {isinstance(p1, Persona)}")
+    '''
 
 if __name__ == "__main__":
     os.system("cls" if os.name == "nt" else "clear")
