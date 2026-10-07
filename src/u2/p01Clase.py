@@ -3,7 +3,7 @@ from datetime import date
 from abc import ABC, abstractmethod
 
 #Clase: Molde para crear objetos, define atributos y metodos
-#Objeto: Instancia de una clase
+#Objeto: Instancia de una clase, aquello que tiene nombre y apellido|
 
 # 4 Pilares de POO
 # Herencia:       Metodos que ya existen por parte de la clase padre
@@ -47,9 +47,9 @@ class Persona:
 
     #@staticmethod    # Metodo de Clase
     #@abstractmethod  # Si hay un método abstracto, la clase debe ser abstracta
-    def calcularEdad(brithdate) -> int:
+    def calcularEdad(birthdate) -> int:
         pass
-        edad = date.today().year - brithdate.year
+        edad = date.today().year - birthdate.year
         return edad
     
     def info(self):
@@ -64,7 +64,7 @@ class Persona:
         
     def descontarPersona():
         Persona.__subtractPersona()
-        
+       
 def esBisiesto(year):
     if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
         return True
@@ -80,6 +80,7 @@ def main():
     print(p1.info())
     
     print(f"Nombre: {p1.nombre}")
+    # print(f"Sexo: {p1.__sexo}")   # Error: Atributo privado
     print(f"Sexo: {p1.getSexo()}")
     print(f"Bisiesto: {esBisiesto(p1.nacimiento.year)}")
     
@@ -96,7 +97,8 @@ def main():
     personas = [p for p in personas if p.nombre != "Maria"]
     Persona._restarPersona()     
     #Persona.__subtractPersona() # Error
-    Persona.descontarPersona()    
+    #Persona.descontarPersona()   
+    print(f"\nConteo de personas-->: {Persona.conteo}") 
     
     print(f"\n{'Nombre':<10} {'Sexo':<6} {'Nacimiento'} {'Edad':>5}")
     for p in personas:
