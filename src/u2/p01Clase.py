@@ -2,7 +2,7 @@ import os
 from datetime import date
 from abc import ABC, abstractmethod
 
-#Clase: Molde, patron para crear objetos, define atributos y metodos
+#Clase: Molde, Patron o Plantilla para crear objetos, define atributos y metodos
 #Objeto: Instancia de una clase, aquello que tiene nombre y apellido|
 
 # 4 Pilares de POO
@@ -47,7 +47,7 @@ class Persona:
 
     #@staticmethod    # Metodo de Clase
     #@abstractmethod  # Si hay un método abstracto, la clase debe ser abstracta
-    def calcularEdad(birthdate) -> int:
+    def calcularEdad(birthdate: date) -> int:
         pass
         edad = date.today().year - birthdate.year
         return edad
@@ -72,7 +72,8 @@ def main():
     ano = 1999
     dia = 29 if esBisiesto(ano) else 28
     p1 = Persona("Juan", True, date(ano, 2, dia))
-    p1.__sexo = False    # Se puede acceder a un atributo protegido desde fuera de la clase, pero no es recomendable
+    #p1.__sexo = False    # No obedece
+    p1.setSexo(False)
     print(p1.info())
     
     print(f"Conteo de personas: {Persona.conteo}")
@@ -80,7 +81,7 @@ def main():
     print(p1.info())
     
     print(f"Nombre: {p1.nombre}")
-    print(f"Sexo: {p1.__sexo}")   # Error: Atributo privado
+    #print(f"Sexo: {p1.__sexo}")   # Error: Atributo privado
     print(f"Sexo: {p1.getSexo()}")
     print(f"Bisiesto: {esBisiesto(p1.nacimiento.year)}")
     
@@ -94,7 +95,7 @@ def main():
     personas.append(Persona("Jose", True,  date(2018, 2, 28)))
     
     del personas[1]   
-    #personas = [p for p in personas if p.nombre != "Maria"]
+    #personas = [p for p in personas if p.nombre != "Maria"] 
     #Persona.__restarPersona()  # Error: No se puede acceder a un método privado desde fuera de la clase
     Persona.descontarPersona()   
     print(f"\nConteo de personas-->: {Persona.conteo}") 
