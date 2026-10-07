@@ -2,11 +2,11 @@ import os
 from datetime import date
 from abc import ABC, abstractmethod
 
-#Clase: Molde para crear objetos, define atributos y metodos
+#Clase: Molde, patron para crear objetos, define atributos y metodos
 #Objeto: Instancia de una clase, aquello que tiene nombre y apellido|
 
 # 4 Pilares de POO
-# Herencia:       Metodos que ya existen por parte de la clase padre
+# Herencia:       Atributos y Metodos que ya existen por parte de la clase padre
 # Abstraccion:    Calcular_impuesto() no importa el como, sino el resultado
 # Polimorfismo:   Acelerar, funciona distinto entre una bici y un coche
 # Encapsulacion:  saldo cambia solo por depositar() y retirar()
@@ -33,7 +33,7 @@ class Persona:
         if not nombre.strip():
             raise ValueError("El nombre no puede estar vacío.")
         self.nombre = nombre
-        self._sexo = sexo
+        self.__sexo = sexo
         self.nacimiento = nacimiento
         Persona.conteo += 1
     
@@ -41,17 +41,17 @@ class Persona:
         #return f"Nombre: {self.nombre}, Sexo: {'H' if self._sexo else 'M'}"
 
     def getSexo(self):
-        return "Hombre" if self._sexo else "Mujer"
+        return "Hombre" if self.__sexo else "Mujer"
 
     def setSexo(self, value):
-        self._sexo = value
+        self.__sexo = value
 
     #@staticmethod    # Metodo de Clase
-    @abstractmethod  # Si hay un método abstracto, la clase debe ser abstracta
+    #@abstractmethod  # Si hay un método abstracto, la clase debe ser abstracta
     def calcularEdad(birthdate) -> int:
         pass
-        #edad = date.today().year - birthdate.year
-        #return edad
+        edad = date.today().year - birthdate.year
+        return edad
     
     def info(self):
         edad = Persona.calcularEdad(self.nacimiento)
@@ -76,13 +76,14 @@ def main():
     ano = 1999
     dia = 29 if esBisiesto(ano) else 28
     p1 = Persona("Juan", True, date(ano, 2, dia))
-    '''  
+    p1.__sexo = False  # Acceso a atributo privado, no recomendado
+ 
     print(f"Conteo de personas: {Persona.conteo}")
     print(p1)
     print(p1.info())
     
     print(f"Nombre: {p1.nombre}")
-    # print(f"Sexo: {p1.__sexo}")   # Error: Atributo privado
+    print(f"Sexo: {p1.__sexo}")   # Error: Atributo privado
     print(f"Sexo: {p1.getSexo()}")
     print(f"Bisiesto: {esBisiesto(p1.nacimiento.year)}")
     
@@ -95,8 +96,8 @@ def main():
     ] 
     personas.append(Persona("Jose", True,  date(2018, 2, 28)))
     
-    #del personas[1]   
-    personas = [p for p in personas if p.nombre != "Maria"]
+    del personas[1]   
+    #personas = [p for p in personas if p.nombre != "Maria"]
     Persona._restarPersona()     
     #Persona.__subtractPersona() # Error
     #Persona.descontarPersona()   
@@ -109,7 +110,7 @@ def main():
     
     print(f"Tipo de p1: {type(p1)}")
     print(f"¿p1 es una instancia de Persona? {isinstance(p1, Persona)}")
-    '''
+
 
 if __name__ == "__main__":
     os.system("cls" if os.name == "nt" else "clear")
