@@ -27,7 +27,7 @@ class Empleado(Persona):
     def __init__(self, nombre, sexo, nacimiento, puesto, salario):
         super().__init__(nombre, sexo, nacimiento)
         self.puesto = puesto
-        self._salario = salario
+        self.salario = salario
         self.cuenta = CuentaBancaria(nombre)
 
     def trabajar(self):
@@ -35,7 +35,7 @@ class Empleado(Persona):
 
     def info(self):
         edad = Persona.calcularEdad(self._nacimiento)
-        return f"Nombre: {self.nombre}, Sexo: {self.getSexo()}, Nacimiento: {self._nacimiento}, Edad: {edad}, Puesto: {self.puesto}, Salario: {self._salario}"
+        return f"Nombre: {self.nombre}, Sexo: {self.getSexo()}, Nacimiento: {self._nacimiento}, Edad: {edad}, Puesto: {self.puesto}, Salario: {self.salario}"
 
 
 def main():

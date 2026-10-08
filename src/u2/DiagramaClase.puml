@@ -3,15 +3,15 @@ skinparam classAttributeIconSize 0
 left to right direction
 
 class Persona {
+  + {static} conteo: int
   + nombre: str
   + _nacimiento: date
-  + {static} conteo: int
   - __sexo: bool
 
+  + {static} calcularEdad(birthdate) : int
   + __init__(nombre, sexo, nacimiento)
   + getSexo() : str
   + setSexo(value)
-  + {static} calcularEdad(birthdate) : int
   + info() : str
 }
 
@@ -25,7 +25,7 @@ class Estudiante {
 
 class Empleado {
   + puesto: str
-  + _salario: float
+  + salario: float
   + cuenta: CuentaBancaria
 
   + __init__(nombre, sexo, nacimiento, puesto, salario)
@@ -41,7 +41,7 @@ class CuentaBancaria {
   + getSaldo() : float
   + depositar(cantidad)
   + retirar(cantidad)
-  + __str__() : str
+
 }
 
 Persona <|-- Estudiante
