@@ -22,7 +22,7 @@ def main():
     print(empleado.info())
     print(empleado.trabajar())
     print(empleado.cuenta)
-    print(f"Saldo:  ${empleado.cuenta._saldo:,.2f}")
+    print(f"Saldo:  ${empleado.cuenta.getSaldo():,.2f}")
     print(f"Sueldo: ${empleado._salario:,.2f}")
 
 if __name__ == "__main__":
