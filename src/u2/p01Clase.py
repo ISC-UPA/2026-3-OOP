@@ -22,7 +22,7 @@ from abc import ABC, abstractmethod
 # Tiene un: Atributo tipo Clase.  Asociación/composición
 
 #class Persona(object):
-#class Persona(ABC): # con abstractmethod, no se puede instanciar la clase Persona
+#class Persona(ABC): # Abstract Base Classes = No se puede instanciar
 class Persona:
     # Atributo de clase
     conteo = 0  # Numero de personas
@@ -45,10 +45,11 @@ class Persona:
     def setSexo(self, value):
         self.__sexo = value
 
-    #@staticmethod    # Metodo de Clase
-    #@abstractmethod  # Si hay un método abstracto, la clase debe ser abstracta
+    #@staticmethod    # Metodo sin modificaciones 
+    #@abstractmethod  # Si hay un método abstracto, la clase debe ser abstracta, no se puede instanciar
     def calcularEdad(birthdate: date) -> int:
         pass
+        #raise NotImplementedError()  # Interfaz Informal: Se define pero no se implementa
         edad = date.today().year - birthdate.year
         return edad
     
@@ -58,7 +59,7 @@ class Persona:
 
     def __restarPersona(): # Metodo de clase protegido, se puede llamar desde la clase y subclases
         Persona.conteo -= 1
-        
+    
     def descontarPersona():
         Persona.__restarPersona()
        

@@ -43,6 +43,7 @@ def main():
     print("Subclases:", Persona.__subclasses__())
     print("Clase Padre:", Empleado.__bases__)
     print("MRO o Method Order Resolution:", Empleado.__mro__)
+    print("Es subclase de Persona:", issubclass(Empleado, Persona))
 
     lista =[]
     lista.append(Estudiante("Luis", True, date(2000, 8, 20), "Ingeniería"))
@@ -57,7 +58,7 @@ def main():
         print(p.trabajar())
         
     print(lista[1].cuenta)
-    print(f"Saldo actual: ${lista[1].cuenta._saldo:,.2f}")
+    print(f"Saldo actual: ${lista[1].cuenta.getSaldo():,.2f}")
     
 
 if __name__ == "__main__":
