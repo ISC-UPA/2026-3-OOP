@@ -1,0 +1,50 @@
+@startuml EsUn_TieneUn
+skinparam classAttributeIconSize 0
+left to right direction
+
+class Persona {
+  + nombre: str
+  + _nacimiento: date
+  + {static} conteo: int
+  - __sexo: bool
+
+  + __init__(nombre, sexo, nacimiento)
+  + getSexo() : str
+  + setSexo(value)
+  + {static} calcularEdad(birthdate) : int
+  + info() : str
+}
+
+class Estudiante {
+  + carrera: str
+
+  + __init__(nombre, sexo, nacimiento, carrera)
+  + trabajar() : str
+  + info() : str
+}
+
+class Empleado {
+  + puesto: str
+  + _salario: float
+  + cuenta: CuentaBancaria
+
+  + __init__(nombre, sexo, nacimiento, puesto, salario)
+  + trabajar() : str
+  + info() : str
+}
+
+class CuentaBancaria {
+  + titular: str
+  - __saldo: float
+
+  + __init__(titular, saldo_inicial=0.0)
+  + getSaldo() : float
+  + depositar(cantidad)
+  + retirar(cantidad)
+  + __str__() : str
+}
+
+Persona <|-- Estudiante
+Persona <|-- Empleado
+Empleado *-- CuentaBancaria
+@enduml

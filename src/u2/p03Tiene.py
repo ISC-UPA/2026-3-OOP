@@ -1,30 +1,28 @@
 import os
 
 class CuentaBancaria:
-    """Encapsulación: el saldo solo cambia por métodos controlados."""
 
     def __init__(self, titular, saldo_inicial=0.0):
         self.titular = titular
-        self._saldo = saldo_inicial
+        self.__saldo = saldo_inicial
 
-    @property
-    def saldo(self):
-        return self._saldo
+    def getSaldo(self):
+        return self.__saldo
 
     def depositar(self, cantidad):
         if cantidad <= 0:
             raise ValueError("La cantidad a depositar debe ser positiva.")
-        self._saldo += cantidad
+        self.__saldo += cantidad
 
     def retirar(self, cantidad):
         if cantidad <= 0:
             raise ValueError("La cantidad a retirar debe ser positiva.")
-        if cantidad > self._saldo:
+        if cantidad > self.__saldo:
             raise ValueError("Saldo insuficiente.")
-        self._saldo -= cantidad
+        self.__saldo -= cantidad
 
     def __str__(self):
-        return f"Cuenta de {self.titular}: ${self._saldo:,.2f}"
+        return f"Cuenta de {self.titular}: ${self.getSaldo():,.2f}"
 
 def main():
     cuenta = CuentaBancaria("Juan Pérez", 1000.0)
@@ -40,6 +38,8 @@ def main():
 
     cuenta.retirar(300.0)
     print(f"Después de retirar: {cuenta}")
+    
+    print(f"Saldo actual: ${cuenta.getSaldo():,.2f}")
 
 if __name__ == "__main__":
     os.system("cls" if os.name == "nt" else "clear")

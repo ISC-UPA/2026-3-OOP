@@ -19,10 +19,10 @@ from abc import ABC, abstractmethod
 
 # Palabras clave:
 # Es un: Herencia
-# Tiene un: Atributo tipo Clase
+# Tiene un: Atributo tipo Clase.  Asociación/composición
 
 #class Persona(object):
-#class Persona(ABC):
+#class Persona(ABC): # con abstractmethod, no se puede instanciar la clase Persona
 class Persona:
     # Atributo de clase
     conteo = 0  # Numero de personas
@@ -32,8 +32,8 @@ class Persona:
         if not nombre.strip():
             raise ValueError("El nombre no puede estar vacío.")
         self.nombre = nombre
-        self.__sexo = sexo    # Atributo privado
-        self.nacimiento = nacimiento
+        self.__sexo = sexo              # Atributo privado
+        self._nacimiento = nacimiento
         Persona.conteo += 1
     
     #def __str__(self):  # Evitar ver la direccion de memoria
@@ -53,8 +53,8 @@ class Persona:
         return edad
     
     def info(self):
-        edad = Persona.calcularEdad(self.nacimiento)
-        return f"Nombre: {self.nombre}, Sexo: {self.getSexo()}, Nacimiento: {self.nacimiento}, Edad: {edad}"
+        edad = Persona.calcularEdad(self._nacimiento)
+        return f"Nombre: {self.nombre}, Sexo: {self.getSexo()}, Nacimiento: {self._nacimiento}, Edad: {edad}"
 
     def __restarPersona(): # Metodo de clase protegido, se puede llamar desde la clase y subclases
         Persona.conteo -= 1
@@ -81,9 +81,10 @@ def main():
     print(p1.info())
     
     print(f"Nombre: {p1.nombre}")
-    #print(f"Sexo: {p1.__sexo}")   # Error: Atributo privado
+    print(f"nacimiento: {p1._nacimiento}")
+    # print(f"Sexo: {p1.__sexo}")   # Error: Atributo privado 
     print(f"Sexo: {p1.getSexo()}")
-    print(f"Bisiesto: {esBisiesto(p1.nacimiento.year)}")
+    print(f"Bisiesto: {esBisiesto(p1._nacimiento.year)}")
     
     p1.setSexo(False)
     print(f"Sexo actualizado: {p1.getSexo()}")
@@ -102,7 +103,7 @@ def main():
     
     print(f"\n{'Nombre':<10} {'Sexo':<6} {'Nacimiento'} {'Edad':>5}")
     for p in personas:
-        print(f"{p.nombre:<10} {p.getSexo():<6} {p.nacimiento} {Persona.calcularEdad(p.nacimiento):>5}")
+        print(f"{p.nombre:<10} {p.getSexo():<6} {p._nacimiento} {Persona.calcularEdad(p._nacimiento):>5}")
     print(f"\nConteo de personas: {Persona.conteo}")
     
     print(f"Tipo de p1: {type(p1)}")
