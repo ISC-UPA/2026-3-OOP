@@ -3,15 +3,6 @@ from datetime import date
 from p01Clase import Persona
 from p03Tiene import CuentaBancaria
 
-'''
-try:
-    from .p01Clase import Persona
-    from .p03Tiene import CuentaBancaria
-except ImportError:
-    from p01Clase import Persona
-    from p03Tiene import CuentaBancaria
-'''
-
 class Estudiante(Persona):
     def __init__(self, nombre, sexo, nacimiento, carrera):
         super().__init__(nombre, sexo, nacimiento)
