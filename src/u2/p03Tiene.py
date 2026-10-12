@@ -1,13 +1,13 @@
 import os
 class CuentaBancaria:
 
-    def uppercase_decorator(function):
+    def uppercase_decorator(funcion):
         def wrapper(param1):
-            func = function(param1)
+            func = funcion(param1)
             make_uppercase = func.upper()
             return make_uppercase
         return wrapper
-
+    
     def __init__(self, titular, saldo_inicial=0.0):
         self.titular = titular
         self.__saldo = saldo_inicial
@@ -24,16 +24,16 @@ class CuentaBancaria:
     def retirar(self, cantidad):
         if cantidad <= 0:
             raise ValueError("La cantidad a retirar debe ser positiva.")
-        if cantidad > self.__saldo:
-            raise ValueError("Saldo insuficiente.")
+        assert cantidad <= self.__saldo, "Saldo insuficiente."
         self.__saldo -= cantidad
 
     @uppercase_decorator
     def __str__(self):
-        return f"Cuenta de {self.titular}: ${self.getSaldo():,.2f}"
+        cadena = f"Cuenta de {self.titular}: ${self.getSaldo():,.2f}"
+        return cadena
 
 def main():
-    cuenta = CuentaBancaria("Juan Pérez", -1000.0)
+    cuenta = CuentaBancaria("Juan Pérez", 1000.0)
     assert(isinstance(cuenta, CuentaBancaria)), "cuenta debe ser una instancia de CuentaBancaria"
     print(cuenta)
 

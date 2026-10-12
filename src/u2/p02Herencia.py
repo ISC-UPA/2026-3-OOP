@@ -41,6 +41,7 @@ def main():
     lista.append(Empleado("Ana", False, date(1990, 5, 15), "Gerente", 50000))
     print(f"\nConteo de personas: {Persona.conteo}")
 
+    
     for p in lista:
         print(p.info())
  
