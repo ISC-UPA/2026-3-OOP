@@ -33,7 +33,7 @@ class CuentaBancaria:
         return cadena
 
 def main():
-    cuenta = CuentaBancaria("Juan Pérez", 1000.0)
+    cuenta = CuentaBancaria("Juan Pérez", -1000.0)
     assert(isinstance(cuenta, CuentaBancaria)), "cuenta debe ser una instancia de CuentaBancaria"
     print(cuenta)
 
@@ -42,6 +42,7 @@ def main():
 
     try:  # Excepciones para manejar errores
         cuenta.retirar(20.0) 
+        a =1
     except ValueError as e:
         print(f"Error al retirar: {e}")
     except Exception as e:
@@ -54,12 +55,9 @@ def main():
     cuenta.retirar(300.0)
     print(f"Después de retirar: {cuenta}")
     
-    print(f"Saldo actual: ${cuenta.getSaldo():,.2f}")
-   
+    print(f"Saldo actual: ${cuenta.getSaldo():,.2f}") 
 
 if __name__ == "__main__":
     os.system("cls" )
     main()
     print("\n. . . H e c h o . . .")
-    
-        
