@@ -1,5 +1,4 @@
 import os
-
 class CuentaBancaria:
 
     def uppercase_decorator(function):
@@ -33,9 +32,8 @@ class CuentaBancaria:
     def __str__(self):
         return f"Cuenta de {self.titular}: ${self.getSaldo():,.2f}"
 
-
 def main():
-    cuenta = CuentaBancaria("Juan Pérez", 1000.0)
+    cuenta = CuentaBancaria("Juan Pérez", -1000.0)
     assert(isinstance(cuenta, CuentaBancaria)), "cuenta debe ser una instancia de CuentaBancaria"
     print(cuenta)
 
@@ -48,7 +46,7 @@ def main():
         print(f"Error al retirar: {e}")
     except Exception as e:
         print(f"Error inesperado: {e} \n {type(e)}")
-    else: # en caso de que no haya excepciones (opcional)
+    else: # en caso de que no haya excepciones           (opcional)
         print(f"Retiro exitoso: {cuenta}")
     finally: # Siempre se ejecuta, haya o no excepciones (opcional)
         print("Operación de retiro finalizada.")
@@ -60,7 +58,8 @@ def main():
    
 
 if __name__ == "__main__":
-    os.system("cls" if os.name == "nt" else "clear")
+    os.system("cls" )
     main()
     print("\n. . . H e c h o . . .")
+    
         
