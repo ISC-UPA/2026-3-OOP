@@ -1,0 +1,93 @@
+@startuml python_interface_vs_abstract
+left to right direction
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+package "ABC y logistica" {
+  interface ITransporte {
+    +entregar(): None
+    +obtener_capacidad(): int
+    +obtener_costo(): float
+  }
+
+  abstract class LogisticaBase {
+    +empresa: str
+    +entregas_realizadas: int
+    +costo_total: float
+    +{abstract} crear_transporte(): ITransporte
+    +planificar_entrega(): None
+    +generar_reporte(): str
+  }
+
+  class Camion {
+    +entregar(): None
+    +obtener_capacidad(): int
+    +obtener_costo(): float
+  }
+
+  class Barco {
+    +entregar(): None
+    +obtener_capacidad(): int
+    +obtener_costo(): float
+  }
+
+  class LogisticaTerrestre {
+    +crear_transporte(): ITransporte
+  }
+
+  class LogisticaMaritima {
+    +crear_transporte(): ITransporte
+  }
+}
+
+package "Protocol y tipado estructural" {
+  interface TransporteProtocol <<Protocol>> {
+    +entregar(): None
+    +obtener_capacidad(): int
+    +obtener_costo(): float
+  }
+
+  class Avion {
+    +entregar(): None
+    +obtener_capacidad(): int
+    +obtener_costo(): float
+  }
+
+  class "procesar_transporte(transporte: TransporteProtocol)" as procesar_transporte <<function>>
+}
+
+package "Herencia multiple" {
+  interface IAlmacenable {
+    +guardar(): None
+  }
+
+  interface ISerializable {
+    +to_json(): str
+  }
+
+  class Documento {
+    +guardar(): None
+    +to_json(): str
+  }
+}
+
+ITransporte <|.. Camion
+ITransporte <|.. Barco
+LogisticaBase <|-- LogisticaTerrestre
+LogisticaBase <|-- LogisticaMaritima
+LogisticaTerrestre ..> Camion : crea
+LogisticaMaritima ..> Barco : crea
+LogisticaBase ..> ITransporte : fabrica
+
+procesar_transporte ..> TransporteProtocol : acepta
+
+IAlmacenable <|.. Documento
+ISerializable <|.. Documento
+
+note right of TransporteProtocol
+  Avion y Camion no heredan explicitamente del Protocol;
+  cumplen su estructura y pueden pasarse a la funcion.
+  @runtime_checkable permite comprobarlo
+  con isinstance() en tiempo de ejecucion.
+end note
+@enduml
