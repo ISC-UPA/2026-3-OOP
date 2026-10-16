@@ -221,6 +221,7 @@ __marimo__/
 personal/
 *.docx
 -*.*
+_*.*
 src/u3/
 
 
