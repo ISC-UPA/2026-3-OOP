@@ -1,5 +1,7 @@
 @echo off
 cls
+g:
+cd \Mi unidad\home\core\code\2026-3-OOP
 git pull
 git status
 timeout /t 2

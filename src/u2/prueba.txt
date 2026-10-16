@@ -11,4 +11,5 @@ palo = ["C♥","D♦","T♣","P♠"]; 4
 https://ellibrodepython.com/
 https://github.com/asabeneh/30-days-of-python
 
+debo verlo 11:56
 
