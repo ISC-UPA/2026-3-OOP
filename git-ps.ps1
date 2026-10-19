@@ -1,4 +1,6 @@
 Clear-Host
+G:
+cd "\Mi unidad\home\core\code\2026-3-OOP"
 
 git pull
 git status
