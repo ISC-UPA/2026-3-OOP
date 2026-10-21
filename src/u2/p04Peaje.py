@@ -111,15 +111,27 @@ class Peaje:
     def imprimir(self):
         print(f'Nombre: {self.nombre} Monto: {self.montoPeaje} Vehiculos: {len(self.vehiculos)}')
 
+    def getTipo(self, v) -> str:
+        tipo = "OVNI"
+        if isinstance(v, Carro):
+            tipo = "Carro"
+        elif isinstance(v, Moto):
+            tipo = "Moto"
+        elif isinstance(v, Camion):
+            tipo = "Camion"
+        else:
+            print("Vehiculo OVNI")
+        return tipo  
 
 def main():
     hoy = datetime.now()
     print("Fecha de hoy:", hoy)
-
+    #                   Y    M   D   h   m  s    
     fecha2 = datetime(2026, 11, 22, 12, 15, 0)
-    fecha1 = datetime(2026, 10, 20, 10, 25, 0)
+    fecha1 = datetime(2026, 11, 22, 10, 25, 0)
     diferencia = fecha2 - fecha1
     print(diferencia)
+
     print("dias:   ",diferencia.days)
     print("horas:  ", diferencia.seconds // 3600)
     print("minutos:", (diferencia.seconds % 3600) // 60 )
@@ -149,7 +161,7 @@ def main():
         peajes[1].addVehiculo(i)
     
     for v in peajes[1].vehiculos:
-        print(v.getPlaca(), peajes[1].calcularPeaje(v))
+        print(v.getPlaca(), peajes[1].getTipo(v),   peajes[1].calcularPeaje(v))
     
     print()
     print("No. Casetas:  ", Peaje.conteoPeajes)
@@ -171,4 +183,6 @@ if __name__ == "__main__":
     os.system("cls")
     main()
     print("\n. . . H e c h o")
+    
+    
     
