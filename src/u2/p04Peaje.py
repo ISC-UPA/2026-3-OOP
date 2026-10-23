@@ -1,7 +1,7 @@
 import os, sys
 from datetime import datetime
 from abc import ABC, abstractmethod
- 
+
 class Vehiculo(ABC):
     
     def __init__(self, placa):
@@ -149,6 +149,7 @@ def main():
 
     
     autos=[
+        Camion("T1",2),
         Carro("C1"),
         Carro("C2"),
         Moto("M1"),
@@ -159,9 +160,11 @@ def main():
     ]
     for i in autos:
         peajes[1].addVehiculo(i)
-    
+   
+    print()
     for v in peajes[1].vehiculos:
-        print(v.getPlaca(), peajes[1].getTipo(v),   peajes[1].calcularPeaje(v))
+        print(peajes[1].nombre, peajes[1].getTipo(v), v.getPlaca(), v.llegada,  peajes[1].calcularPeaje(v))
+        
     
     print()
     print("No. Casetas:  ", Peaje.conteoPeajes)
