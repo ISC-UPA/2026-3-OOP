@@ -14,8 +14,8 @@ config = {
 }
 
 # Conexión
-#conn = mysql.connector.connect(**config)
-#cursor = conn.cursor(dictionary=True)  # dictionary=True → resultados como dict
+conn = mysql.connector.connect(**config)
+cursor = conn.cursor(dictionary=True)  # dictionary=True → resultados como dict
 
 # ============================
 # ALTAS (INSERT)
@@ -23,16 +23,16 @@ config = {
 def insertarPeaje(nombre, tipo, placa, llegada, monto):
     sql = "INSERT INTO peajes (nombre, tipo, placa, llegada, montoPeaje) VALUES (%s, %s, %s, %s, %s)"
     #sql =f"insert into peajes values(null, {nombre}, {tipo}, {placa}, {llegada}, {monto})"
-    print(sql)
-    #cursor.execute(sql, (nombre, tipo, placa, llegada, monto))
-    #conn.commit()
+    #print(sql)
+    cursor.execute(sql, (nombre, tipo, placa, llegada, monto))
+    conn.commit()
     print(f"Peaje:'{placa}' insertado correctamente.")
 
-    #cursor.close()
-    #conn.close()    
+    cursor.close()
+    conn.close()    
 
 def main():
-    insertarPeaje("Centro", "Carro", "C2", "2026-10-22 21:47:06", 20000)
+    insertarPeaje("Origen", "Carro", "C2", "2026-10-22 21:47:06", 20000)
 
 if __name__ == "__main__":
     os.system("cls")
