@@ -11,10 +11,10 @@ llegada datetime,
 montoPeaje decimal
 );
 
-insert into peajes(nombre, tipo, placa, llegada)
-values("Norte","Carro", "C1", now());
-
 insert into peajes values(
-null, "Norte", "Carro", "C2", now(), 10000, null);
+null, "Norte", "Carro", "C2", now(), 10000);
+
+insert into peajes(nombre, tipo, placa, llegada,  montoPeaje)
+values("Norte","Carro", "C1", now(), 5000);
 
 
