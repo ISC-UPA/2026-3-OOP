@@ -3,6 +3,7 @@ from datetime import datetime
 from pathlib import Path
 import mysql.connector
 from dotenv import load_dotenv
+import pandas as pd
 
 load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=True)
 config = {
@@ -30,9 +31,30 @@ def insertarPeaje(nombre, tipo, placa, llegada, monto):
 
     cursor.close()
     conn.close()    
+    # cursor.rowcount  # Numero de registros:  Insert, Delete or Update
+    
+    id_generado = cursor.lastrowid
+    print(f"Peaje insertado correctamente. ID: {id_generado}")
+    return id_generado    
+
+def consultarPeaje(nombre):
+    # Opción con cursor
+    sql = "SELECT * FROM peajes WHERE nombre = %s"
+    cursor.execute(sql, (nombre,))
+    rows = cursor.fetchall()   # len(rows) # Numero de registros
+    for row in rows:
+        print(row)
+
+    # Opción con pandas
+    sql = "SELECT * FROM peajes WHERE nombre = %s"
+    df = pd.read_sql_query(sql, conn, params=(nombre,))
+    print("Registros: ", len(df))
+    return rows, df
 
 def main():
-    insertarPeaje("Origen", "Carro", "C2", "2026-10-22 21:47:06", 20000)
+    #nuevo_id = insertarPeaje("3C", "Carro", "C2", "2026-10-22 21:47:06", 20000)
+    #print("Nuevo registro:", nuevo_id)
+    consultarPeaje("Norte")
 
 if __name__ == "__main__":
     os.system("cls")
