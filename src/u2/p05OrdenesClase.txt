@@ -1,0 +1,28 @@
+Tabulacion = Alt + shift + ↓ 
+Clases
+
+Orden:
+    ordenID    ↑
+    fecha 
+    detalles:DetalleOrden = []
+
+    totalOrden(): float 
+    addItem(detalleID, cantidad, producto:Producto)
+    imprimir()
+
+DetalleOrden:
+    detalleID  ↑
+    cantidad
+    producto: Producto
+
+    subtotalDetalle(): float
+    imprimir()
+
+Producto:   
+    productoID ↑
+    descripcion 
+    -precio
+
+    imprimir()
+
+

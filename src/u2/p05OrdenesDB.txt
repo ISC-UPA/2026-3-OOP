@@ -1,0 +1,19 @@
+Tabulacion = Alt + shift + ↓
+Tablas
+
+Ordenes:
+    ordenID    ↑
+    fecha 
+
+DetalleOrdenes:
+    detalleID  ↑
+    OrdenID 
+    productoID
+    cantidad
+    precioUnitario
+
+Productos:   
+    productoID ↑
+    descripcion
+    precio
+

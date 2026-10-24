@@ -164,9 +164,12 @@ def main():
     print()
     for v in peajes[1].vehiculos:
         print(peajes[1].nombre, peajes[1].getTipo(v), v.getPlaca(), v.llegada,  peajes[1].calcularPeaje(v))
-        
+        #insertarPeaje("Centro", "Carro", "C2", "2026-10-22 21:47:06", 20000)
     
     print()
+    peajes[0].imprimir()
+    peajes[1].imprimir()
+    
     print("No. Casetas:  ", Peaje.conteoPeajes)
     print("Monto Total:  ", Peaje.montoPeajes)      
     print("Peaje[0]  $:  ", peajes[0].montoPeaje )   
@@ -178,8 +181,7 @@ def main():
     print("No. Vehiculos en Peaje[0]", len(peajes[0].vehiculos))
     print("No. Vehiculos en Peaje[1]", len(peajes[1].vehiculos))
 
-    peajes[0].imprimir()
-    peajes[1].imprimir()
+
 
 
 if __name__ == "__main__":
