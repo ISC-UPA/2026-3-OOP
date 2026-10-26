@@ -2,7 +2,7 @@ Tabulacion = Alt + shift + ↓
 Tablas
 
 Ordenes:
-    ordenID    ↑
+    ordenID    ↑            id_generado = cursor.lastrowid
     fecha 
 
 DetalleOrdenes:

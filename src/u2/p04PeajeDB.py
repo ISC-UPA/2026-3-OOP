@@ -29,8 +29,8 @@ def insertarPeaje(nombre, tipo, placa, llegada, monto):
     conn.commit()
     print(f"Peaje:'{placa}' insertado correctamente.")
 
-    cursor.close()
-    conn.close()    
+    #cursor.close()
+    #conn.close()    
     # cursor.rowcount  # Numero de registros:  Insert, Delete or Update
     
     id_generado = cursor.lastrowid
@@ -38,23 +38,64 @@ def insertarPeaje(nombre, tipo, placa, llegada, monto):
     return id_generado    
 
 def consultarPeaje(nombre):
+    '''
     # Opción con cursor
     sql = "SELECT * FROM peajes WHERE nombre = %s"
     cursor.execute(sql, (nombre,))
     rows = cursor.fetchall()   # len(rows) # Numero de registros
+    
     for row in rows:
         print(row)
-
+    '''    
+    sql = "SELECT nombre, placa FROM peajes WHERE id = %s"
+    cursor.execute(sql, (nombre,))
+    rows = cursor.fetchall()   # len(rows) # Numero de registros
+    print("Renglones:" , len(rows))
+    for row in rows:
+        print(row)    
+    #name = row.nombre
+    name = row["nombre"]
+    placa = row['placa']
+    print("Nombre:", name, "Placa:", placa)
+      
+          
+        
+    #print(name)
+    #print(placa)
+        
+    '''
     # Opción con pandas
     sql = "SELECT * FROM peajes WHERE nombre = %s"
     df = pd.read_sql_query(sql, conn, params=(nombre,))
     print("Registros: ", len(df))
     return rows, df
+    '''
+    
+    
+    # Opción con pandas modificado
+    sql = "SELECT nombre, placa FROM peajes WHERE id = %s"
+    df = pd.read_sql_query(sql, conn, params=(nombre,))
+    os.system("cls")
+
+    if df.empty:
+        print("No hay registros")
+        return
+
+    name = df['nombre'].iloc[0]
+    placa = df['placa'].iloc[0]
+    print(name)
+    print(placa)
+    
+
+    
+    
+    
+    #return rows, df
 
 def main():
-    #nuevo_id = insertarPeaje("3C", "Carro", "C2", "2026-10-22 21:47:06", 20000)
+    nuevo_id = insertarPeaje("3B", "Carro", "XXX", "2026-10-22 21:47:06", 20000)
     #print("Nuevo registro:", nuevo_id)
-    consultarPeaje("Norte")
+    #consultarPeaje(10)
 
 if __name__ == "__main__":
     os.system("cls")
