@@ -7,7 +7,7 @@ Ordenes:
 
 DetalleOrdenes:
     detalleID  ↑
-    OrdenID 
+    ordenID 
     productoID
     cantidad
     precioUnitario
@@ -16,4 +16,5 @@ Productos:
     productoID ↑
     descripcion
     precio
+    stock
 

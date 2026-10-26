@@ -18,7 +18,7 @@ DetalleOrden:
     subtotalDetalle(): float
     imprimir()
 
-Producto:   
+Producto: Lectura  
     productoID ↑
     descripcion 
     -precio

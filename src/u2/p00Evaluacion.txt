@@ -1,0 +1,30 @@
+Evaluación de la unidad 1 
+
+Problema del Peaje 5.1:  
+Si la solucion se presenta sin modificaciones, tal como se vio en clase: Valor 1.5
+Si al momento de pasar por el Paeje, se inserta en la Base de Datos:     Valor 3.0
+
+Problema del Punto de Venta 5.5:  Valor 7.0 
+Se tiene una tabla de productos en la DB con informacion
+Se desea crear ordenes o Tickets, 
+Donde se genere la "Orden" con los datos principales y
+El "Detalle de la orden" de los articulos ordenados
+
+4 puntos: 
+1 punto: Calcula el total de la Orden 
+1 punto: Permite agregar productos a la Orden
+1 punto: Muestra los productos que tiene la orden
+1 punto: Graba a la DB la "Orden" y El "Detalle de la Orden"
+
+3 puntos:
+1 punto: La tabla "Detalle de la Orden" tiene ordenID               cursor.lastrowid
+1 punto: La tabla "Detalle de la Orden" tiene productoID            pandas o cursor
+1 punto: La tabla "Detalle de la Orden" tiene precioUnitario
+
+1 punto extra:
+En la tabla Productos se actualiza el stock                         Update 
+sql = "UPDATE Productos SET stock = stock - %s WHERE productoID = %s"
+cursor.execute(sql, (cantidad, productoID))
+
+
+

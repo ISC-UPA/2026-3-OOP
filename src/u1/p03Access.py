@@ -7,7 +7,7 @@ import pyodbc
 sys.path.append("src")
 #sys.path.append(os.getcwd())
 
-from tools import fn                              # general
+from tools import fn                                   # general
 # from src.tools import fn                             # general
 # from src.tools.fn import numero_aleatorio, sumar     # especifica
 
@@ -39,7 +39,7 @@ def main():
     sql2 = f"SELECT * FROM Estados where Partido = '{partido}'"
     sql3 = "select IdEstado, abr, gobernador, nacimiento, \n" + \
            "       YEAR(NOW()) - YEAR(nacimiento) as Edad \n" + \
-           "FROM Estados where Partido = ?"
+           "FROM Estados where Partido = ? "
   
     sql4 = ( 
     "select IdEstado, abr, gobernador, nacimiento, \n" + 
