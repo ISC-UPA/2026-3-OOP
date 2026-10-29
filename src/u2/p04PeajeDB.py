@@ -53,7 +53,6 @@ def consultarPeaje(nombre):
     print("Renglones:" , len(rows))
     for row in rows:
         print(row)    
-    #name = row.nombre
     name = row["nombre"]
     placa = row['placa']
     print("Nombre:", name, "Placa:", placa)
@@ -75,7 +74,7 @@ def consultarPeaje(nombre):
     # Opción con pandas modificado
     sql = "SELECT nombre, placa FROM peajes WHERE id = %s"
     df = pd.read_sql_query(sql, conn, params=(nombre,))
-    os.system("cls")
+    # os.system("cls")
 
     if df.empty:
         print("No hay registros")
@@ -84,7 +83,7 @@ def consultarPeaje(nombre):
     name = df['nombre'].iloc[0]
     placa = df['placa'].iloc[0]
     print(name)
-    print(placa)
+    print("------>", placa)
     
 
     
@@ -93,9 +92,9 @@ def consultarPeaje(nombre):
     #return rows, df
 
 def main():
-    nuevo_id = insertarPeaje("3B", "Carro", "XXX", "2026-10-22 21:47:06", 20000)
+    nuevo_id = insertarPeaje("3C", "Ferrari", "XX", "2026-10-22 21:47:06", 20000)
     #print("Nuevo registro:", nuevo_id)
-    #consultarPeaje(10)
+    #consultarPeaje(4)
 
 if __name__ == "__main__":
     os.system("cls")

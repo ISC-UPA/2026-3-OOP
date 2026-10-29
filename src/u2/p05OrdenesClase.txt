@@ -12,7 +12,7 @@ Orden:
 
 DetalleOrden:
     detalleID  ↑
-    cantidad
+    cantidad:int
     producto: Producto
 
     subtotalDetalle(): float

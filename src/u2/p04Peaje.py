@@ -94,7 +94,11 @@ class Peaje:
             print("Vehiculo No Identificado")
 
         self.montoPeaje+=costoVehiculo     # monto de una caseta
-        Peaje.montoPeajes+=costoVehiculo   # monto de todas las casetas         
+        Peaje.montoPeajes+=costoVehiculo   # monto de todas las casetas       
+        
+        print(self.nombre, self.getTipo(v), v.getPlaca(), v.llegada,  self.calcularPeaje(v))
+        #insertarPeaje("Centro", "Carro", "C2", "2026-10-22 21:47:06", 20000)
+        
         
     def calcularPeaje(self, v) -> int:  # dinero de un Vehiculo
         costoUnidad = 0
@@ -143,11 +147,11 @@ def main():
     #a1 = Vehiculo("a")
     #peajes[0].addVehiculo(a1)    
 
-    a2 = Camion("b",3)
-    peajes[0].addVehiculo(a2)
-    a2.imprimir()
+    a2 = Camion("XX",3)
+    peajes[1].addVehiculo(a2)
+    # a2.imprimir()
 
-    
+    '''
     autos=[
         Camion("T1",2),
         Carro("C1"),
@@ -180,7 +184,7 @@ def main():
     print("No. Camiones: ", Peaje.conteoCamiones)
     print("No. Vehiculos en Peaje[0]", len(peajes[0].vehiculos))
     print("No. Vehiculos en Peaje[1]", len(peajes[1].vehiculos))
-
+    '''
 
 
 
