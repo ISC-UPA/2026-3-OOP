@@ -1,4 +1,6 @@
-Tabulacion = Alt + shift + ↓
+# Tabulacion = Alt + shift + ↓
+# Tabulacion = Alt + shift + Mouse arrastre
+
 Tablas
 
 Ordenes:
