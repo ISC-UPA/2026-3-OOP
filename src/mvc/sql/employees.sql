@@ -1,10 +1,10 @@
 CREATE TABLE employees (
-  employeeID int AUTO_INCREMENT PRIMARY, 
+  employeeID int AUTO_INCREMENT PRIMARY key, 
   LastName varchar(20),
   FirstName varchar(10),
   BirthDate datetime,
   HireDate datetime
-) 
+);
 
 
 INSERT INTO employees (employeeID, LastName, FirstName, BirthDate, HireDate) VALUES
