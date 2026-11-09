@@ -5,3 +5,16 @@ CREATE TABLE employees (
   BirthDate datetime,
   HireDate datetime
 ) 
+
+
+INSERT INTO employees (employeeID, LastName, FirstName, BirthDate, HireDate) VALUES
+(1, 'Davolio', 'Nancy', '1968-12-08 00:00:00', '1992-05-01 00:00:00'),
+(2, 'Fuller', 'Andrew', '1952-02-19 00:00:00', '1992-08-14 00:00:00'),
+(3, 'Leverling', 'Janet', '1963-08-30 00:00:00', '1992-04-01 00:00:00'),
+(4, 'Peacock', 'Margaret', '1958-09-19 00:00:00', '1993-05-03 00:00:00'),
+(5, 'Buchanan', 'Steven', '1955-03-04 00:00:00', '1993-10-17 00:00:00'),
+(6, 'Suyama', 'Michael', '1963-07-02 00:00:00', '1993-10-17 00:00:00'),
+(7, 'King', 'Robert', '1960-05-29 00:00:00', '1994-01-02 00:00:00'),
+(8, 'Callahan', 'Laura', '1958-01-09 00:00:00', '1994-03-05 00:00:00'),
+(9, 'Dodsworth', 'Anne', '1969-07-02 00:00:00', '1994-11-15 00:00:00'),
+(10, 'HERNANDEZ', 'JUAN', '2000-01-01 00:00:00', '2010-10-10 00:00:00');
