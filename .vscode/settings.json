@@ -1,3 +1,5 @@
 {
-    "python.analysis.autoImportCompletions": true
+    "python.analysis.autoImportCompletions": true,
+    "python.defaultInterpreterPath": "C:\\Apps\\Python312\\python.exe",
+    "python-envs.defaultEnvManager": "ms-python.python:system"
 }

@@ -11,6 +11,7 @@ from tools import fn                                   # general
 # from src.tools import fn                             # general
 # from src.tools.fn import numero_aleatorio, sumar     # especifica
 
+
 def insertar_estados(IdEstado, abr, Nombre, gobernador, nacimiento):
     sql = "INSERT INTO Estados (IdEstado, abr, nombre, gobernador, nacimiento) VALUES (?, ?, ?, ?, ?)"
     cursor.execute(sql, (IdEstado, abr, Nombre, gobernador, nacimiento))

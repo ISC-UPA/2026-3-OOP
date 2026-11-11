@@ -1,13 +1,13 @@
 CREATE TABLE employees (
   employeeID int AUTO_INCREMENT PRIMARY key, 
-  LastName varchar(20),
-  FirstName varchar(10),
-  BirthDate datetime,
-  HireDate datetime
+  last_name varchar(20),
+  first_name varchar(10),
+  birth_date datetime,
+  hire_date datetime
 );
 
 
-INSERT INTO employees (employeeID, LastName, FirstName, BirthDate, HireDate) VALUES
+INSERT INTO employees (employeeID, last_name, first_name, birth_date, hire_date) VALUES
 (1, 'Davolio', 'Nancy', '1968-12-08 00:00:00', '1992-05-01 00:00:00'),
 (2, 'Fuller', 'Andrew', '1952-02-19 00:00:00', '1992-08-14 00:00:00'),
 (3, 'Leverling', 'Janet', '1963-08-30 00:00:00', '1992-04-01 00:00:00'),
