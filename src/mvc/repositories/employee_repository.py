@@ -1,25 +1,50 @@
-import os
-import sys
-from pathlib import Path
-
+import os, sys
 import pandas as pd
-from sqlalchemy import Null
+from pathlib import Path
 
 # Add the project root so this file can also be run directly.
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
-from src.mvc.repositories.database_oop import DatabaseConnection
 from src.mvc.models.employee import Employee
+from src.mvc.repositories.database_oop import DatabaseConnection
 
 class EmployeeRepository:
     def __init__(self, database: DatabaseConnection) -> None:
         self.db = database
 
+    def showEmployee(self, id: int | str = 0) -> Employee | None:
+        self.db._asegurar_conexion()
+        sql = """
+            SELECT EmployeeID AS employeeID, last_name, first_name, birth_date, hire_date
+            FROM employees
+            WHERE EmployeeID = %s
+        """
+        cursor = self.db.connection.cursor(dictionary=True)
+        try:
+            cursor.execute(sql, (int(id),))
+            row = cursor.fetchone()
+        finally:
+            cursor.close()
+        if row is None:
+            return None
+
+        return Employee(
+            row["employeeID"],
+            row["last_name"],
+            row["first_name"],
+            row["birth_date"],
+            row["hire_date"],
+        )
+
     def listEmployee(self) -> list[Employee]:
         self.db._asegurar_conexion()
         sql = "SELECT employeeID, last_name, first_name, birth_date, hire_date FROM employees"
-        self.db.cursor.execute(sql)
-        rows = self.db.cursor.fetchall()
+        cursor = self.db.connection.cursor(dictionary=True)
+        try:
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+        finally:
+            cursor.close()
         return [
             Employee(
                 row["employeeID"],
@@ -31,51 +56,21 @@ class EmployeeRepository:
             for row in rows
         ]
 
-    def pdEmployee(self) -> pd.DataFrame:
+    def pdContratadosMenores(self, edad: int | str) -> pd.DataFrame:
         self.db._asegurar_conexion()
-        sql = "SELECT * FROM employees"
-        self.db.cursor.execute(sql)
-        return pd.DataFrame(self.db.cursor.fetchall())
-
-    def pd2Employee(self) -> pd.DataFrame:
-        self.db._asegurar_conexion()
-        sql = "SELECT * FROM employees"
-        return pd.read_sql_query(sql, self.db.connection, params=())  # Mensaje: UserWarning
-
-    def pdContratadosMenores(self, edad) -> pd.DataFrame:
-        self.db._asegurar_conexion()
-        sql = '''
-        select * from employees
-        where year(hire_date) - year(birth_date) <= %s
-        '''
-        return self.db.execute_pdSQL(sql, (edad,))
-
-
-    def showEmployee(self, id=0) -> Employee | None:
-        self.db._asegurar_conexion()
-        sql = "SELECT * FROM employees WHERE EmployeeID = %s"        
-        cursor = self.db.connection.cursor()
+        sql = """
+            SELECT employeeID, last_name, first_name, birth_date, hire_date
+            FROM employees
+            WHERE TIMESTAMPDIFF(YEAR, birth_date, hire_date) < %s
+        """
+        cursor = self.db.connection.cursor(dictionary=True)
         try:
-            cursor.execute(sql, (id,))
-            row = cursor.fetchone()
+            cursor.execute(sql, (int(edad),))
+            return pd.DataFrame(cursor.fetchall())
         finally:
             cursor.close()
-        if row:
-            '''
-            return Employee(
-                employeeID=int(row[0]),
-                last_name=str(row[1]),
-                first_name=str(row[2]),
-                birth_date=row[3],
-                hire_date=row[4],
-            )
-            '''
-            return Employee(int(row[0]),  str(row[1]), row[2], row[3], row[4] )
-        else:
-            return None
 
-
-    def insertEmployee(self, employee:Employee) -> int:
+    def insertEmployee(self, employee: Employee) -> int:
         self.db._asegurar_conexion()
         sql = """
             INSERT INTO employees (last_name, first_name, birth_date, hire_date) 
@@ -83,28 +78,39 @@ class EmployeeRepository:
         """
         cursor = self.db.connection.cursor()
         try:
-            cursor.execute(sql, (employee.last_name, employee.first_name, employee.birth_date, employee.hire_date,),)
+            cursor.execute(
+                sql,
+                (
+                    employee.last_name,
+                    employee.first_name,
+                    employee.birth_date,
+                    employee.hire_date,
+                ),
+            )
             self.db.connection.commit()
-            id_generado = cursor.lastrowid
-            conteo = cursor.rowcount
+            return cursor.lastrowid
+        except Exception:
+            self.db.connection.rollback()
+            raise
         finally:
             cursor.close()
-        return id_generado
 
-    def deleteEmployee(self, id) -> int:
+    def deleteEmployee(self, id: int | str) -> int:
         self.db._asegurar_conexion()
         sql = "DELETE FROM employees WHERE EmployeeID = %s"
         cursor = self.db.connection.cursor()
         try:
-            cursor.execute(sql, (id,))
+            cursor.execute(sql, (int(id),))
             self.db.connection.commit()
-            conteo = cursor.rowcount
+            return cursor.rowcount
+        except Exception:
+            self.db.connection.rollback()
+            raise
         finally:
-            cursor.close()        
-        return conteo
+            cursor.close()
 
     def updateEmployee(self, employee: Employee) -> int:
-        self.db._asegurar_conexion()  
+        self.db._asegurar_conexion()
         sql = """
             UPDATE employees
             SET last_name = %s, first_name = %s, birth_date = %s, hire_date = %s
@@ -112,17 +118,25 @@ class EmployeeRepository:
         """
         cursor = self.db.connection.cursor()
         try:
-            cursor.execute(sql, (
-                employee.last_name,employee.first_name,employee.birth_date,employee.hire_date,employee.employeeID))
+            cursor.execute(
+                sql,
+                (
+                    employee.last_name,
+                    employee.first_name,
+                    employee.birth_date,
+                    employee.hire_date,
+                    employee.employeeID,
+                ),
+            )
             self.db.connection.commit()
-            conteo = cursor.rowcount
+            return cursor.rowcount
+        except Exception:
+            self.db.connection.rollback()
+            raise
         finally:
-            cursor.close()        
-        return conteo
-      
-      
-        
-        
+            cursor.close()
+
+
 def main() -> None:
     db = None
     try:
@@ -136,12 +150,9 @@ def main() -> None:
             print(f"{employee.employeeID:>3} {employee.last_name:<20}")
 
         print()
-        df = repositories.pdEmployee()
+        df = repositories.pdContratadosMenores(25)
         print(df)
 
-        print()
-        df = repositories.pd2Employee()
-        print(df)
     finally:
         if db is not None:
             db.close()

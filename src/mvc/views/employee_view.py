@@ -33,12 +33,6 @@ Nombre:   {employee.first_name}
 Fecha de nacimiento:   {employee.birth_date}
 Fecha de contratación: {employee.hire_date}      
          ''')
-            
-            #print(f"ID: {employee.employeeID}")
-            #print(f"Apellido: {employee.last_name}")
-            #print(f"Nombre: {employee.first_name}")
-            #print(f"Fecha de nacimiento:   {employee.birth_date}")
-            #print(f"Fecha de contratación: {employee.hire_date}")
         else:
             print("Empleado no encontrado.")
 
@@ -48,7 +42,7 @@ Fecha de contratación: {employee.hire_date}
             print("Listado de Empleados")
             print(" ID last_name    first_name     Fecha_Nac    Fecha_Contratacion")
             for employee in employees:
-                print(f"{employee.employeeID:>3} {employee.last_name:<20}")
+                print(f"{employee.employeeID:>3} {employee.last_name:<12} {employee.first_name:<10}")
                 #print(f"El sueldo es: {sueldo:^15,.2f}")
         else:
             print("No existen empleados")
@@ -97,8 +91,22 @@ Fecha de contratación: {employee.hire_date}
         
 def main():
     # EmployeeView.menuEmployee()
-    employee = EmployeeView.insertEmployee()
-    print(employee)
+    employee1 = Employee(9, "Lopez", "Jennifer", "2000-01-02", "2010-11-12")
+    employee2 = Employee(10, "Pitt", "Brad", "2010-01-02", "2025-09-10")
+    # EmployeeView.showEmployee(employee1)
+
+    lista = [employee1, employee2]
+    #EmployeeView.listEmployee(lista)
+
+    #employee = EmployeeView.insertEmployee()
+    #print(employee)
+
+    #employee_update = EmployeeView.updateEmployee(employee2)
+    # print(employee_update)
+    
+
+
+    
 
 if __name__ == "__main__":
     os.system("cls" if os.name == "nt" else "clear")

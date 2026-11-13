@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 # Add the project root so this file can also be run directly.
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
-
+# sys.path.append(os.getcwd())
 from src.mvc.models.employee import Employee
 
 load_dotenv(Path(__file__).resolve().parents[3] / ".env", override=True)
@@ -58,6 +58,11 @@ class DatabaseConnection:
             self.cursor.execute(sql, params)
         return pd.DataFrame(self.cursor.fetchall())
 
+    # Metodo para ejecutar consultas personalizadas y devolver resultados como DataFrame
+    def execute_pd2SQL(self, sql, params=None) -> pd.DataFrame:
+        self._asegurar_conexion()
+        return pd.read_sql_query(sql, self.connection, params=params)
+
     # Metodo para ejecutar altas, bajas y cambios, y devolver el Numero de registros
     def execute_abc(self, sql, params=None) -> int:
         self._asegurar_conexion()
@@ -93,7 +98,8 @@ def main():
 
         print()
         sql = "SELECT * FROM employees WHERE year(hire_date) =  %s"
-        df = db.execute_pdSQL(sql, (1992,))
+        # df = db.execute_pdSQL(sql,  (1992,))
+        df = db.execute_pd2SQL(sql, (1992,))  # Mensaje: UserWarning
         print(df)
         
         print()
