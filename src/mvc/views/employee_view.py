@@ -90,19 +90,20 @@ Fecha de contratación: {employee.hire_date}
         print("***" , message, "***")
         
 def main():
-    # EmployeeView.menuEmployee()
+    #EmployeeView.menuEmployee()
+    
     employee1 = Employee(9, "Lopez", "Jennifer", "2000-01-02", "2010-11-12")
     employee2 = Employee(10, "Pitt", "Brad", "2010-01-02", "2025-09-10")
-    # EmployeeView.showEmployee(employee1)
+    EmployeeView.showEmployee(employee1)
 
     lista = [employee1, employee2]
-    #EmployeeView.listEmployee(lista)
+    EmployeeView.listEmployee(lista)
 
     #employee = EmployeeView.insertEmployee()
     #print(employee)
 
     #employee_update = EmployeeView.updateEmployee(employee2)
-    # print(employee_update)
+    #print(employee_update)
     
 
 

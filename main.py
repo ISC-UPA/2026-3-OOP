@@ -18,10 +18,11 @@ def main():
     runpy.run_path(prg.__file__)
 
 if __name__ == "__main__":
-      MATERIA="OOP"  # Variable global
-      os.system("cls" if os.name == 'nt' else 'clear')  # Limpiar pantalla
-      main()
-      print(f"Nos vemos mañana  en {MATERIA}") # OOP
-      print(". . . Hecho Amigos de tercero")
+    MATERIA="OOP"  # Variable global
+    # os.system("cls" if os.name == 'nt' else 'clear')  # Limpiar pantalla
+    main()
+    print(f"Nos vemos mañana  en {MATERIA}") # OOP
+    print(". . . Hecho Amigos de tercero")
+
       
   
