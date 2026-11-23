@@ -1,87 +1,115 @@
+
 import os
 import sys
-from pathlib import Path
+from dataclasses import replace
 
+#'''
+from pathlib import Path
 # Add the project root so this file can also be run directly.
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
+from src.config import get_db_config
+from src.mvc.repositories.database import Database
+#'''
+
+from src.mvc.models.employee import Employee
 from src.mvc.repositories.employee_repository import EmployeeRepository
 from src.mvc.views.employee_view import EmployeeView
-from src.mvc.repositories.database_oop import DatabaseConnection
+from src.mvc.controllers.base_controller import BaseController
 
-class EmployeeController:
+class EmployeeController(BaseController):
     def __init__(self, repository: EmployeeRepository, view: EmployeeView) -> None:
-        self.repository = repository
-        self.view = view
+        super().__init__(repository, view)
+        self.actions = {
+            "1": self.insert,
+            "2": self.delete,
+            "3": self.update,
+            "4": self.show,
+            "5": self.list_all,
+            "6": self.pdContratados,
+        }
 
-    def showEmployee(self, id=0): # pudiera omitirse el id
-        self.view.showMessage("Consulta de un Empleado")
-        id = input("Ingrese el ID: ")
-        employee = self.repository.showEmployee(id)
+    def insert(self) -> None: #1
+        try:
+            #employee = self.view.insert()              # puede regresar dict | Employee
+            employee = Employee(**self.view.insert())   
+        except ValueError as error:  # el modelo rechazó los datos
+            self.view.show_error()
+            return        
+        new_id = self.repository.insert(employee)
+        self.view.show_message(f"Empleado con ID {new_id}: dado de Alta")
+
+    def delete(self) -> None: #2
+        employee = self._find_employee()
         if employee:
-            self.view.showEmployee(employee)
+            conteo = self.repository.delete(employee.employeeID)        
+            self.view.show_message(f"Empleado ID: {id} dado de baja")
+
+    def update(self) -> None: #3
+        employee = self._find_employee()
+        if employee:
+            self.view.show(employee)
+            updated_employee = self.view.update(employee)
+            conteo = self.repository.update(updated_employee)
+            self.view.show_message(f"Empleado ID: {id} Modificado")
         else:
-            self.view.showError(f'Empleado con ID: {id} No Existe')
+            self.view.show_error(f'Empleado con ID: {id} No Existe')        
 
-    def listEmployee(self):
-        lista = self.repository.listEmployee()        
-        self.view.listEmployee(lista)
+    def actualizar(self) -> None: #3
+        # cadena.replace(viejo, nuevo)        
+        employee = self._find_employee()
+        if employee is None:
+            return
+        self.view.show(employee)
+        new_dict = self.view.actualizar(employee)
+        try:
+            updated = replace(employee, new_dict)   # dataclasses 
+        except ValueError as error:
+            self.view.show_error(error)            
+        conteo = self.repository.update(updated)
+        self.view.show_message(f"Empleado ID: {id} Modificado")
 
-    def pdContratadosMenores(self, edad):
-        df = self.repository.pdContratadosMenores(edad)
+
+    def show(self) -> None: #4
+        employee = self._find_employee()
+        if employee:
+            self.view.show(employee)
+
+
+    def list_all(self) -> None: #5
+        lista = self.repository.list_all()        
+        self.view.list_all(lista)
+
+    def pdContratados(self) -> None: #6
+        self.view.show_message("Empleados Contratados")
+        edad = input("Ingrese la Edad: ")
+        df = self.repository.pdContratados(edad)
         print(f"Contratados menores a {edad} años")
         print(df)
 
-
-    def insertEmployee(self, modelEmpleado):
-        id = self.repository.insertEmployee(modelEmpleado)
-        self.view.showMessage(f"Empleado: {id} dado de Alta")
-        
-    def insertarEmployee(self):
-        employee = self.view.insertEmployee()
-        if not employee.last_name:
-            self.view.showError("Nombre Obligatorio")
-            return
-        id = self.repository.insertEmployee(employee)
-        if id:
-            self.view.showMessage(f"Empleado con ID {id}: dado de Alta")
-
-
-    def deleteEmployee(self, id=0):  # pudiera omitirse el id
-        self.view.showMessage("Baja de Empleados")
+    def _find_employee(self) -> Employee | None:
+        """Pide un ID y busca al empleado. Si no existe, avisa y devuelve None."""
         id = input("Ingrese el ID: ")
-        conteo = self.repository.deleteEmployee(id)
-        if conteo:
-            self.view.showMessage(f"Empleado ID: {id} dado de baja")
-        else:
-            self.view.showError(f'Empleado con ID: {id} No Existe')
+        employee = self.repository.show(id)
+        if employee is None:
+            self.view.show_error(f"El empleado {id} no existe")
+        return employee
 
-   
-    def updateEmployee(self, id=0):   # pudiera omitirse el id
-        self.view.showMessage("Cambios en el Empleado")
-        id = input("Ingrese el ID: ")
-        employee = self.repository.showEmployee(id)
-        if employee:
-            self.view.showEmployee(employee)
-            updated_employee = self.view.updateEmployee(employee)
-            conteo = self.repository.updateEmployee(updated_employee)
-            self.view.showMessage(f"Empleado ID: {id} Modificado")
-        else:
-            self.view.showError(f'Empleado con ID: {id} No Existe')        
-                        
-        
+
+#'''        
 def main():
-    db = DatabaseConnection()
+    db = Database(get_db_config())
     repository = EmployeeRepository(db)
     view = EmployeeView()
     controller = EmployeeController(repository, view)
 
-    controller.showEmployee()
-    controller.listEmployee()
-    controller.pdContratadosMenores(25)
+    #controller.show()
+    controller.list_all()
+    #controller.pdContratados()
 
 if __name__ == "__main__":
     os.system("cls" if os.name == "nt" else "clear")
     main()
     print("\n. . . H e c h o")
 
+#'''

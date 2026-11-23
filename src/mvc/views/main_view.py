@@ -10,14 +10,13 @@ class MainView(BaseView):
     def ask_option(self) -> str:
         print("""
 ========== Menú Principal ==========
-1. Empleados
-2. Productos
+1. Empleados Controller
+2. Empleados Menu
 0. Salir
 ====================================""")
         return input("Seleccione una opción: ").strip()
         
 def main():
-    MainView().show_message("Hola Mundo!. . .")
     MainView().ask_option()
 
 if __name__ == "__main__":

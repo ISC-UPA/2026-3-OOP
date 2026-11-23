@@ -1,31 +1,47 @@
-import os, sys
+import os
 from dataclasses import dataclass
-from numpy import double
+from decimal import Decimal
 
 @dataclass  # init,  repr,  eq          # En java Lombok @Data   setter, getter, constructor
-class Producto:
-    productoID:int
-    descripcion:str
-    precio: double
+class Product:
+    description:str
+    price: Decimal
+    stock: int = 0
+    product_id: int | None = None  # None = todavía no se guarda en la base de datos
 
+    def __post_init__(self) -> None:
+        self.description = self.description.strip()
+        if not self.description:
+            raise ValueError("La descripción es obligatoria")
+        if self.price < 0:
+            raise ValueError("El precio no puede ser negativo")
+
+def _to_product(row: dict) -> Product:
+    return Product(        # No importa el orden de los atributos
+        product_id=row["productID"],
+        description=row["description"],
+        price=row["price"],
+        stock=row["stock"],
+    )
 
 def main():
-    a1 = Producto(1, "Coca", 20)
+    datos= {"description":"Coca", "price":20, "productID": 1, "stock": 0 }
+    a1 = _to_product(datos)
     print(a1)
+    print(type(a1)) # Product
 
-    a2 = Producto(2, "Pepsi", 20)
+    a2 = Product("Pepsi", 18, 0, 2)
     print(a2)
 
-    a3 = Producto(1, "Coca", 20)
+    a3 = Product("Coca", 20, 0, 1)
 
-    print(a1 == a2)
-    print(a1 == a3)
+    print(a1 == a2) # False
+    print(a1 == a3) # True
 
-    print(Producto.__dict__)
+    print(Product.__dict__)
     print()
-    print(Producto.__doc__)
+    print(Product.__doc__)   # describe
     print(a1)
-
 
 
 if __name__ == "__main__":
