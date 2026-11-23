@@ -13,7 +13,9 @@ from src.mvc.views.employee_view import EmployeeView
 from src.mvc.controllers.employee_controller import EmployeeController
 # from src.mvc.controllers.product_controller import ProductController
 
-from src.mvc.menu_employee import menuEmployee  
+from src.mvc.menu_employee import menuEmployee
+#from src.mvc.menu_product  import menuProduct
+
 
 def main() -> None:
     view = MainView()
