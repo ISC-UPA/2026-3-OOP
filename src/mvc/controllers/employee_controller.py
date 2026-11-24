@@ -31,10 +31,11 @@ class EmployeeController(BaseController):
 
     def insert(self) -> None: #1
         try:
-            #employee = self.view.insert()              # puede regresar dict | Employee
-            employee = Employee(**self.view.insert())   
+            employee = self.view.insert()
+            if not isinstance(employee, Employee):
+                employee = Employee(**employee)
         except ValueError as error:  # el modelo rechazó los datos
-            self.view.show_error()
+            self.view.show_error(str(error))
             return        
         new_id = self.repository.insert(employee)
         self.view.show_message(f"Empleado con ID {new_id}: dado de Alta")
@@ -43,7 +44,7 @@ class EmployeeController(BaseController):
         employee = self._find_employee()
         if employee:
             conteo = self.repository.delete(employee.employeeID)        
-            self.view.show_message(f"Empleado ID: {id} dado de baja")
+            self.view.show_message(f"Empleado ID: {employee.employeeID} dado de baja")
 
     def update(self) -> None: #3
         employee = self._find_employee()
@@ -51,9 +52,9 @@ class EmployeeController(BaseController):
             self.view.show(employee)
             updated_employee = self.view.update(employee)
             conteo = self.repository.update(updated_employee)
-            self.view.show_message(f"Empleado ID: {id} Modificado")
+            self.view.show_message(f"Empleado ID: {updated_employee.employeeID} Modificado")
         else:
-            self.view.show_error(f'Empleado con ID: {id} No Existe')        
+            return
 
     def actualizar(self) -> None: #3
         # cadena.replace(viejo, nuevo)        

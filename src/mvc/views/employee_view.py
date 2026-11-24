@@ -11,7 +11,7 @@ from src.mvc.views.base_view import BaseView
 class EmployeeView(BaseView):
 
     #@staticmethod
-    def menuEmployee(self) -> str:
+    def menu(self) -> str:
         print('''
 ======= Menu de Empleados ========
 1. Altas
@@ -36,8 +36,7 @@ class EmployeeView(BaseView):
         hire_date =  datetime.strptime(hire_date, "%Y-%m-%d").date()
    
         empleado = Employee(0, last_name, first_name, birth_date, hire_date)
-        #return empleado
-        return {0, last_name, first_name, birth_date, hire_date}
+        return empleado
 
     #3
     def update(self, employee:Employee) -> Employee:
@@ -134,4 +133,3 @@ if __name__ == "__main__":
         
       
     
-

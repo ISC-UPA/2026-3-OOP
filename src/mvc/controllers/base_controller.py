@@ -11,7 +11,7 @@ class BaseController:
 
     def run(self) -> None:
         while True:
-            option = self.view.ask_option()  # presenta menu y captura opcion
+            option = self.view.menu()  # presenta menu y captura opcion
             if option == "0":
                 break
             action = self.actions.get(option)

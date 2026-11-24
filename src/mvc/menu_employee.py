@@ -30,7 +30,7 @@ def menuEmployee() -> None:
     # controller.pdContratados()
 
     while True:
-        option = view.menuEmployee()
+        option = view.menu()
         if option == "1":   # Altas
             controller.insert()          
         elif option == "2": # Bajas
@@ -48,8 +48,6 @@ def menuEmployee() -> None:
             break
         else:
             print("Opción no válida. Intente nuevamente.")
-            
-    db.close()
 
 
 
@@ -57,4 +55,3 @@ if __name__ == "__main__":
     os.system("cls" if os.name == "nt" else "clear")
     menuEmployee()
     print("\n. . . H e c h o")
-

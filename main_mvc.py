@@ -32,7 +32,7 @@ def main() -> None:
     try:
         while True:
             os.system("cls")
-            option = view.ask_option()  # Presenta Menu y captura opcion
+            option = view.ask_option()  # Presenta MainMenu y captura opcion
 
             #''' Tipico:  Menu por cada Entidad
             if option == "1":

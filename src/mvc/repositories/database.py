@@ -24,20 +24,23 @@ class Database:
         return cls._instance
 
     def __init__(self, config:dict) -> None: 
+        self.config = config
         # Evita re-inicializar la conexión cada vez que se llama Database()
-        if not hasattr(self, "connection"):
+        if not hasattr(self, "connection") or self.connection is None:
             self.connection = mysql.connector.connect(**config)
 
     def _asegurar_conexion(self):
         """Si la conexión se cayó, la restablece (sigue siendo la misma instancia)."""
-        if not self.connection.is_connected():
+        if not hasattr(self, "connection") or self.connection is None:
+            self.connection = mysql.connector.connect(**self.config)
+        elif not self.connection.is_connected():
             self.connection.reconnect(attempts=3, delay=1)
 
     def close(self) -> None:
         """Cierra la conexión y permite crear una nueva en el futuro."""
-        if hasattr(self, "connection"):
+        if hasattr(self, "connection") and self.connection is not None:
             self.connection.close()
-            del self.connection
+            self.connection = None
         Database._instance = None
 
 
@@ -56,7 +59,7 @@ class Database:
     def execute_abc(self, sql: str, params: tuple = ()) -> tuple[int, int]:  
         #id = self.execute_many([(sql, params)]) 
         #return 0, id
-        self.connection.ping(reconnect=True, attempts=3, delay=1)
+        self._asegurar_conexion()
         cursor = self.connection.cursor()
         try:
             if params is None:
@@ -79,7 +82,7 @@ class Database:
         O se guardan todas, o si una falla no se guarda ninguna.
         Devuelve el ID generado por la última instrucción (si lo hubo).
         """
-        self.connection.ping(reconnect=True, attempts=3, delay=1)
+        self._asegurar_conexion()
         cursor = self.connection.cursor()
         try:
             for sql, params in statements:
