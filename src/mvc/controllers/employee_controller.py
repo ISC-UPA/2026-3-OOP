@@ -2,6 +2,7 @@
 import os
 import sys
 from dataclasses import replace
+import questionary
 
 #'''
 from pathlib import Path
@@ -48,14 +49,17 @@ class EmployeeController(BaseController):
     def delete(self) -> None: #2
         employee = self._find_employee()
         if employee:
-            conteo = self.repository.delete(employee.employeeID)        
-            self.view.show_message(f"Empleado ID: {employee.employeeID} dado de baja")
+            opcion = questionary.select("¿Deseas Eliminarlo?",choices=["Si", "No"]).ask()
+            if opcion == "Si": 
+                conteo = self.repository.delete(employee.employeeID)        
+                self.view.show_message(f"Empleado ID: {employee.employeeID} dado de baja")
 
     def update(self) -> None: #3
         employee = self._find_employee()
         if employee:
             self.view.show(employee)
             updated_employee = self.view.update(employee)
+            print("-->", updated_employee)
             conteo = self.repository.update(updated_employee)
             self.view.show_message(f"Empleado ID: {updated_employee.employeeID} Modificado")
         else:
@@ -67,9 +71,8 @@ class EmployeeController(BaseController):
         if employee is None:
             return
         self.view.show(employee)
-        new_dict = self.view.actualizar(employee)
         try:
-            updated = replace(employee, new_dict)   # dataclasses 
+            updated = replace(employee, **self.view.actualizar(employee))   # @dataclass (Models) 
         except ValueError as error:
             self.view.show_error(error)            
         conteo = self.repository.update(updated)

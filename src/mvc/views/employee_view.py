@@ -40,22 +40,38 @@ class EmployeeView(BaseView):
 
     #3
     def update(self, employee:Employee) -> Employee:
-        if employee:
-            print("Cambios en el empleado")
-            print(f"ID: {employee.employeeID}")
+        print("Dejar en blanco para no cambiar")
+        print(f"Cambiar empleado ID: {employee.employeeID}")
 
-            print(f"Apellido actual: {employee.last_name}")
-            new_last_name = input("Ingrese el nuevo apellido (dejar en blanco para no cambiar): ")
-            if new_last_name:
-                employee.last_name = new_last_name
+        new_last_name = input(f"Apellido {employee.last_name}: ").strip()
+        new_first_name = input(f"Nombre   {employee.first_name}: ").strip()
+        new_birth_date = input(f"Fecha Nacimiento   {employee.birth_date}: ").strip()
+        new_hire_date = input(f"Fecha Contratacion {employee.hire_date}: ").strip()
 
-            print(f"Fecha de nacimiento actual: {employee.birth_date}")
-            new_birth_date = input("Ingrese la nueva fecha de nacimiento (YYYY-MM-DD) (dejar en blanco para no cambiar): ")
-            if new_birth_date:
-                employee.birth_date=  datetime.strptime(new_birth_date, "%Y-%m-%d").date()
-        else:
-            print("Empleado no encontrado.")
-        return employee
+        last_name = new_last_name or employee.last_name
+        first_name = new_first_name or employee.first_name
+
+        try:
+            birth_date = (
+                datetime.strptime(new_birth_date, "%Y-%m-%d").date()
+                if new_birth_date
+                else employee.birth_date
+            )
+            hire_date = (
+                datetime.strptime(new_hire_date, "%Y-%m-%d").date()
+                if new_hire_date
+                else employee.hire_date
+            )
+        except ValueError as error:
+            raise ValueError("Las fechas deben tener el formato YYYY-MM-DD") from error
+
+        return Employee(
+            employee.employeeID,
+            last_name,
+            first_name,
+            birth_date,
+            hire_date,
+        )
 
     #3
     def actualizar(self, current: Employee ) -> dict:
@@ -94,9 +110,18 @@ Fecha de contratación: {employee.hire_date}
     def list_all(self, employees: list[Employee]) -> None:
         if employees:
             print("Listado de Empleados")
-            print(" ID last_name    first_name     Fecha_Nac    Fecha_Contratacion")
-            for employee in employees:
-                print(f"{employee.employeeID:>3} {employee.last_name:<12} {employee.first_name:<10}")
+            print(" ID last_name    first_name  Fecha_Nac Fecha_Contratacion")
+            for emp in employees:
+                birth_date = emp.birth_date
+                hire_date = emp.hire_date
+                if isinstance(birth_date, str):
+                    birth_date = datetime.strptime(birth_date, "%Y-%m-%d").date()
+                if isinstance(hire_date, str):
+                    hire_date = datetime.strptime(hire_date, "%Y-%m-%d").date()
+                print(
+                    f"{emp.employeeID:>3} {emp.last_name:<12} {emp.first_name:<10}  "
+                    f"{birth_date.strftime('%Y-%m-%d')}  {hire_date.strftime('%d-%m-%Y')}"
+                )
                 #print(f"El sueldo es: {sueldo:^15,.2f}")
         else:
             print("No existen empleados")

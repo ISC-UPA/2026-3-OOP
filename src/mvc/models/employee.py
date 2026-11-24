@@ -24,7 +24,8 @@ class Employee:
             f"employeeID: {self.employeeID} | "
             f"Apellido: {self.last_name} | "
             f"Nombre: {self.first_name}  | "
-            f"Nacimiento: {self.birth_date}"
+            f"Nacimiento: {self.birth_date} | "
+            f"Contratacion: {self.hire_date} "
     )
         
 
