@@ -37,7 +37,7 @@ class EmployeeView(BaseView):
    
         empleado = Employee(0, last_name, first_name, birth_date, hire_date)
         return empleado
-
+        #return {"employeeID": 0, "last_name":last_name, "first_name":first_name, "birth_date":birth_date, "hire_date":hire_date}  # dict
     #3
     def update(self, employee:Employee) -> Employee:
         print("Dejar en blanco para no cambiar")
