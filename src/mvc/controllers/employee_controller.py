@@ -17,9 +17,13 @@ from src.mvc.repositories.employee_repository import EmployeeRepository
 from src.mvc.views.employee_view import EmployeeView
 from src.mvc.controllers.base_controller import BaseController
 
+#class EmployeeController:
 class EmployeeController(BaseController):
     def __init__(self, repository: EmployeeRepository, view: EmployeeView) -> None:
-        super().__init__(repository, view)
+        #super().__init__(repository, view)
+        self.repository = repository
+        self.view = view
+        #'''
         self.actions = {
             "1": self.insert,
             "2": self.delete,
@@ -28,6 +32,7 @@ class EmployeeController(BaseController):
             "5": self.list_all,
             "6": self.pdContratados,
         }
+        #'''
 
     def insert(self) -> None: #1
         try:

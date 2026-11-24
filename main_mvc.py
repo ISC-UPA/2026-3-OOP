@@ -36,7 +36,7 @@ def main() -> None:
 
             #''' Tipico:  Menu por cada Entidad
             if option == "1":
-                employeeController.run()          
+                employeeController.run() 
             elif option == "2":
                 menuEmployee()
             elif option == "0":
@@ -56,7 +56,7 @@ def main() -> None:
             '''
 
     finally:
-        db.close()
+        db.close() # Se cierra la DB
 
 
 if __name__ == "__main__":

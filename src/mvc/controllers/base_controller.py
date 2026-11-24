@@ -5,8 +5,8 @@ class BaseController:
     """Ciclo del menú que comparten todos los controladores."""
 
     def __init__(self, repository, view) -> None:
-        self.repository = repository
-        self.view = view
+        #self.repository = repository
+        #self.view = view
         self.actions = {}  # cada controlador lo llena: {"1": self.add, "2": self.delete, ...}
 
     def run(self) -> None:
