@@ -20,6 +20,8 @@ MANIFEST
 
 
 # Personalizado
+*.rar
+*.zip
 personal/
 *.docx
 -*.*
