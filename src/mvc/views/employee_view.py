@@ -39,7 +39,7 @@ class EmployeeView(BaseView):
         return empleado
         #return {"employeeID": 0, "last_name":last_name, "first_name":first_name, "birth_date":birth_date, "hire_date":hire_date}  # dict
     #3
-    def update(self, employee:Employee) -> Employee:
+    def update(self, employee:Employee) -> Employee | dict:
         print("Dejar en blanco para no cambiar")
         print(f"Cambiar empleado ID: {employee.employeeID}")
 
@@ -65,13 +65,35 @@ class EmployeeView(BaseView):
         except ValueError as error:
             raise ValueError("Las fechas deben tener el formato YYYY-MM-DD") from error
 
-        return Employee(
-            employee.employeeID,
-            last_name,
-            first_name,
-            birth_date,
-            hire_date,
-        )
+        #return Employee(employee.employeeID, last_name, first_name, birth_date, hire_date, )
+        return {"employeeID": employee.employeeID, "last_name":last_name, "first_name":first_name, "birth_date":birth_date, "hire_date":hire_date}  # dict
+
+    def upsert(self, current: Employee | None = None) -> dict:
+        """Pide los datos del empleado. En un cambio, Enter conserva el valor actual."""
+        if current:
+            print("Enter conserva el valor actual")        
+            print(f"Cambios en empleado ID: {current.employeeID}")
+            employeeID = current.employeeID
+            new_last_name = input(f"Apellido {current.last_name}: ").strip()
+            new_first_name = input(f"Nombre   {current.first_name}: ").strip()
+            new_birth_date = input(f"Fecha Nacimiento   {current.birth_date}: ").strip() 
+            new_hire_date = input(f"Fecha Contratacion {current.hire_date}: ").strip()
+        else:
+            employeeID = 0
+            new_last_name =  input(f"Apellido: ").strip()
+            new_first_name = input(f"Nombre :  ").strip()
+            new_birth_date = input(f"Fecha Nacimiento:   ").strip()
+            new_hire_date =  input(f"Fecha Contratacion: ").strip()
+
+        last_name  = new_last_name  or current.last_name
+        first_name = new_first_name or current.first_name
+        birth_date = str(new_birth_date or current.birth_date)
+        hire_date  = str(new_hire_date  or current.hire_date)
+
+        birth_date = datetime.strptime(birth_date, "%Y-%m-%d").date()
+        hire_date  = datetime.strptime(hire_date,  "%Y-%m-%d").date()
+        return {"employeeID": employeeID, "last_name":last_name, "first_name":first_name, "birth_date":birth_date, "hire_date":hire_date}  # dict
+       
 
     #3
     def actualizar(self, current: Employee ) -> dict:

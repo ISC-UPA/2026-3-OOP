@@ -38,6 +38,7 @@ class EmployeeController(BaseController):
     def insert(self) -> None: #1
         try:
             employee = self.view.insert()
+            #employee = self.view.upsert()
             if not isinstance(employee, Employee):
                 employee = Employee(**employee)
         except ValueError as error:  # el modelo rechazó los datos
@@ -58,10 +59,12 @@ class EmployeeController(BaseController):
         employee = self._find_employee()
         if employee:
             self.view.show(employee)
-            updated_employee = self.view.update(employee)
-            print("-->", updated_employee)
-            conteo = self.repository.update(updated_employee)
-            self.view.show_message(f"Empleado ID: {updated_employee.employeeID} Modificado")
+            updated = self.view.update(employee)
+            #updated = self.view.upsert(employee)
+            if not isinstance(updated, Employee):
+                updated = Employee(**updated)            
+            conteo = self.repository.update(updated)
+            self.view.show_message(f"Empleado ID: {employee.employeeID} Modificado")
         else:
             return
 

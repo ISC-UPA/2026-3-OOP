@@ -16,6 +16,7 @@ class Product:
         if self.price < 0:
             raise ValueError("El precio no puede ser negativo")
 
+
 def _to_product(row: dict) -> Product:
     return Product(        # No importa el orden de los atributos
         product_id=row["productID"],
@@ -38,10 +39,11 @@ def main():
     print(a1 == a2) # False
     print(a1 == a3) # True
 
-    print(Product.__dict__)
-    print()
-    print(Product.__doc__)   # describe
-    print(a1)
+    print("describe:  ",Product.__doc__)   # describe
+    print("contenido: ", a1)
+
+    #print(Product.__dict__)
+    #print()
 
 
 if __name__ == "__main__":
