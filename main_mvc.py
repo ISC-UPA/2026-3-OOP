@@ -62,4 +62,4 @@ def main() -> None:
 if __name__ == "__main__":
     os.system("cls")    
     main()
-    print(". . . H e c h o")
+    print(". . . H e c h o ")
